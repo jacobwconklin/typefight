@@ -1,0 +1,32 @@
+// import material library if I settle on one
+
+.GameCard {
+    margin: 50px;
+    width: 300px;
+    height: 200px;
+    box-shadow: 5;
+    border-radius: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: white;
+        width: fit-content;
+
+    }
+
+    &:hover {
+        margin: 47px;
+        border: 3px solid green;
+        cursor: pointer;
+    }
+}
+
+.CardImage {
+    width: 200px;
+    height: 200px;
+
+}

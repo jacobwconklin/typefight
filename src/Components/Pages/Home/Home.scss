@@ -1,0 +1,28 @@
+
+.Home {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.PlayOptions {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.OptionBox {
+    margin: 50px;
+    padding: 15px;
+    border-radius: 10%;
+    box-shadow: 5px;
+    background-color: lightgray;
+
+    &:hover {
+        background-color: white;
+        cursor: pointer;
+    }
+}
