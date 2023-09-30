@@ -3,6 +3,7 @@ import Home from './Components/Pages/Home/Home';
 import './Router.scss';
 import GameSelect from './Components/Pages/GameSelect/GameSelect';
 import Playground from './Components/Pages/Playground/Playground';
+import SimpleTypeGame from './Components/Pages/SimpleTypeGame/SimpleTypeGame';
 
 // Router
 const Router = (props) => {
@@ -10,12 +11,15 @@ const Router = (props) => {
     return (
         <div className='Router'>
             <BrowserRouter>
+
                 <Routes>
                     <Route path="pg" element={<Playground />} />
+                    <Route path="simple" element={<SimpleTypeGame />} />
                     <Route path="games" element={<GameSelect />} />
                     <Route path="home" element={<Home />} />
                     <Route path="*" element={<Home />} />
                 </ Routes>
+                
             </BrowserRouter>
         </div>
     )

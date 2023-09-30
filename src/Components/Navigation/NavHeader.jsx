@@ -1,9 +1,8 @@
+import { Link } from 'react-router-dom';
 import './NavHeader.scss';
 
 // NavHeader
 const NavHeader = (props) => {
-
-    // const navigate = ();
 
     return (
         <div className='NavHeader'>
@@ -12,7 +11,7 @@ const NavHeader = (props) => {
                 X
             </div>
             <div className='TypeFight'>
-                <h1>TypeFight</h1>
+                <Link to={"/"} className='Title'>TypeFight</Link>
             </div>
         </div>
     )

@@ -26,8 +26,10 @@
         display: flex;
         align-items: center;
 
-        h1 {
-            color: white
+        .Title {
+            color: white;
+            font-size: xx-large;
+            text-decoration: none;
         }
 
         &:hover {

@@ -22,6 +22,12 @@ const Home = (props) => {
                     <h1 style={{color:'blue'}}>Play Solo</h1>
                 </div>
             </div>
+            <div className='OptionBox'
+                    onClick={() => navigate('/simple')}
+                    style={{textAlign:'center'}}
+                >
+                    <h1 style={{color:'white'}}>Simply Type</h1>
+            </div>
             <div className='FunAnimations'>
 
             </div>
