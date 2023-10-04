@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Playground.scss';
-import { sanitizeString } from '../../../Utils';
+import { sanitizeString } from '../../../../Utils';
 
 // Playground
 

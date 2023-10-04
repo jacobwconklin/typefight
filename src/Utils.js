@@ -7,7 +7,8 @@
 
     // Get the base URL of the back-end server - change to quickly switche between locally run and deployed back-end
     export const getServerBaseUrl = () => {
-        return "http://localhost:3000/";
+        return "https://typefightbackend.azurewebsites.net/";
+        // return "http://localhost:3000/";
     }
 
     // standard header for hitting the back-end server

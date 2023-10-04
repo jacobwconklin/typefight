@@ -2,6 +2,15 @@
 
 This is a web-application for typing games created by Jacob Conklin on 08/08/2023.
 
+
+## Deployment
+
+Deployed on Azure, redeploy by zipping up build folder then copying it (via drag and drop from file explorer) 
+onto this page SPECIFICALLY Into the folder -> site -> wwwroot:
+https://typefight.scm.azurewebsites.net/DebugConsole
+Deployed app is available at:
+https://typefight.azurewebsites.net/
+
 ## Available Scripts
 
 In the project directory, you can run:

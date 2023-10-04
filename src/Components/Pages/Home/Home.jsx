@@ -10,14 +10,18 @@ const Home = (props) => {
     return (
         <div className='Home'>
             <div className='PlayOptions'>
-                <div className='OptionBox'>
+                <div className='OptionBox'
+                    onClick={() => navigate('/play/host')}
+                >
                     <h1 style={{color:'red'}}>Host a Game</h1>
                 </div>
-                <div className='OptionBox'>
+                <div className='OptionBox'
+                    onClick={() => navigate('/play/join')}
+                >
                     <h1 style={{color:'green'}}>Join a Game</h1>
                 </div>
                 <div className='OptionBox'
-                    onClick={() => navigate('/games')}
+                    onClick={() => navigate('/play/solo')}
                 >
                     <h1 style={{color:'blue'}}>Play Solo</h1>
                 </div>

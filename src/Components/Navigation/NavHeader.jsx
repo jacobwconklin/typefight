@@ -8,7 +8,7 @@ const NavHeader = (props) => {
         <div className='NavHeader'>
             <div className='SideBarButton'>
                 {/* Cause side bar to entirely disappear / re-appear */}
-                X
+                $$
             </div>
             <div className='TypeFight'>
                 <Link to={"/"} className='Title'>TypeFight</Link>

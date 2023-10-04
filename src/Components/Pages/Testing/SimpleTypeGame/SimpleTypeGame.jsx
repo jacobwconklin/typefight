@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './SimpleTypeGame.scss';
-import { getServerBaseUrl, getStandardHeader, sanitizeString } from '../../../Utils';
+import { getServerBaseUrl, getStandardHeader, sanitizeString } from '../../../../Utils';
 
 // Hopefully a pre-cursor to more involved games, this is just to establish a proof of concept between front-end, back-end and db
 // and create a working game that can hopefully be hosted
