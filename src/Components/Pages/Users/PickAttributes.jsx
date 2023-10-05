@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './PickAttributes.scss';
+import ProfileContainer from '../../Reusable/ProfileContainer';
 
 // PickAttributes presents reusable component to allow user to pick their alias, 
 // icon, font, and color for hosts, joining players, and solo players.
@@ -12,6 +13,7 @@ const PickAttributes = (props) => {
 
     return (
         <div className='PickAttributes'>
+            <ProfileContainer alias={alias} />
             <div className='Alias'>
                 <h1>Enter Your Alias:</h1>
                 <input
@@ -19,13 +21,20 @@ const PickAttributes = (props) => {
                     type="text"
                     onChange={e => {
                             e.preventDefault();
+                            // TODO replace spaces with _
                             setAlias(e.target.value);
                         }}
                     placeholder='Funny Name Here'
                 />
             </div>
-            <div>
-                
+            <div className='Icon'>
+                <p>Pick an icon</p>
+            </div>
+            <div className='Color'>
+                <p>Pick a color</p>
+            </div>
+            <div className='Icon'>
+                <p>Pick a font</p>
             </div>
         </div>
     )

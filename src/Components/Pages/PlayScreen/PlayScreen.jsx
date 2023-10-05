@@ -64,7 +64,7 @@ const PlayScreen = (props) => {
     return (
         <div className='PlayScreen'>
             <SessionContext.Provider
-                values={{sessionId, setSessionId,  playerId, setPlayerId, session}}
+                value={{sessionId, setSessionId,  playerId, setPlayerId, session}}
             >
                 {
                     session.selected_game ? 

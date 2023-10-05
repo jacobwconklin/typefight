@@ -1,5 +1,15 @@
 // import material library if I settle on one
 
 .NewPlayer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+}
+
+.CreatePlayer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
 }

@@ -15,6 +15,7 @@ const NewPlayer = (props) => {
 
     return (
         <div className='NewPlayer'>
+            <h1>{playerType}</h1>
             {
                 // if player already has playerId and sessionId show them the party screen, otherwise
                 // have them pick their attributes and submit to set their player

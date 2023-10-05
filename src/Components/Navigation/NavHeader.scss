@@ -25,13 +25,15 @@
 
     .TypeFight {
         height: 50px;
+        padding: 0px 10px 0px 10px;
         display: flex;
         align-items: center;
 
         .Title {
-            color: white;
+            color: var(--title-color);
             font-size: xx-large;
             text-decoration: none;
+            transition: color 0.6s;
         }
 
         &:hover {
