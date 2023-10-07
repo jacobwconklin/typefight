@@ -14,7 +14,7 @@ const Router = (props) => {
                 <Routes>
                     {/* Play path may control a lot of the navigation via conditional rendering of the session, and then
                         the games instead of routing for each change in page */}
-                    <Route path="play/:type" element={<PlayScreen />} />
+                    <Route path="play/:type/:code?" element={<PlayScreen />} />
                     <Route path="pg" element={<Playground />} />
                     <Route path="simple" element={<SimpleTypeGame />} />
                     <Route path="games" element={<GameSelect />} />

@@ -12,9 +12,9 @@ const Home = (props) => {
 
     return (
         <div className='Home full-screen'>
-            <div className='FadeInGradient full-screen' style={{backgroundImage: 'radial-gradient(rgba(255, 255, 255), red)'}} id="red-fig" />
-            <div className='FadeInGradient full-screen' style={{backgroundImage: 'radial-gradient(rgba(255, 255, 255), green)'}} id="green-fig" />
-            <div className='FadeInGradient full-screen' style={{backgroundImage: 'radial-gradient(rgba(255, 255, 255), blue)'}} id="blue-fig" />
+            <div className='FadeInGradient full-screen' style={{backgroundImage: 'radial-gradient(rgba(0, 0, 0, 10), red)'}} id="red-fig" />
+            <div className='FadeInGradient full-screen' style={{backgroundImage: 'radial-gradient(gray, green)'}} id="green-fig" />
+            <div className='FadeInGradient full-screen' style={{backgroundImage: 'radial-gradient(gray, blue)'}} id="blue-fig" />
             <div className='PlayOptions'>
                 <div className='OptionBox'
                     onClick={() => navigate('/play/host')}
@@ -33,7 +33,7 @@ const Home = (props) => {
                     onClick={() => navigate('/play/join')}
                     onMouseEnter={() => {
                         r.style.setProperty('--title-color', 'green');
-                        document.getElementById("green-fig").style.opacity = '20%'
+                        document.getElementById("green-fig").style.opacity = '25%'
                     }}
                     onMouseLeave={() => {
                         r.style.setProperty('--title-color', 'white');

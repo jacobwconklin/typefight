@@ -16,7 +16,7 @@ const PlayScreen = (props) => {
     // If game is selected show that game
 
     // type of player either host, join, or solo
-    const { type } = useParams();
+    const { type, code } = useParams();
     
     // session status can be held in state here and continually updated from server as this component
     // won't unmount throughout session
@@ -27,14 +27,7 @@ const PlayScreen = (props) => {
     const [session, setSession] = useState({
         started: false,
         selected_game: null,
-        players: [
-            {
-                alias:"",
-                icon:"",
-                font:"",
-                color:""
-            }
-        ]
+        players: []
     });
   
     useEffect(() => {
@@ -43,7 +36,7 @@ const PlayScreen = (props) => {
         const interval = setInterval(async () => {
             // fetch session status from backend IF sessionId and playerId exist
             if (playerId && sessionId) {
-                const result = await fetch(getServerBaseUrl + "session/status", {
+                const result = await fetch(getServerBaseUrl() + "session/status", {
                     method: "POST",
                     headers: getStandardHeader(),
                     body: JSON.stringify({
@@ -76,7 +69,7 @@ const PlayScreen = (props) => {
                         (playerId && sessionId && session.started) ?
                         <GameSelect />
                         :
-                        <NewPlayer type={type}/>
+                        <NewPlayer type={type} code={code}/>
                     )
                 }
             </SessionContext.Provider>

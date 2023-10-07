@@ -11,6 +11,10 @@ https://typefight.scm.azurewebsites.net/DebugConsole
 Deployed app is available at:
 https://typefight.azurewebsites.net/
 
+## Design
+
+Designed largely with custom CSS, and using the Ant Design component library for React available at: https://ant.design/
+
 ## Available Scripts
 
 In the project directory, you can run:

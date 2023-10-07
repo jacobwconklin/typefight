@@ -1,23 +1,74 @@
 // import material library if I settle on one
 
 .PickAttributes {
-    width: 100%;
+    min-width: 100%;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-// force all children to have half width
+// force all children to have half width?
+// .PickAttributes > * {
+//     margin: 10px;
+//     padding: 10px;
+//     width: 250px;
+// }
+
 .PickAttributes > * {
     margin: 10px;
-    padding: 10px;
-    width: 250px;
 }
 
+.AliasColorAndFont {
+    width: 75%;
+    min-width: 750px;
+    display: flex;
+    justify-content: space-between;
+}
+
+// .AliasColorAndFont > * {
+//     flex-basis: 33%;
+// }
+
 .Alias {
-    background-color: silver;
+    width: 250px;
     border-radius: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.Color {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Font {
+    width: 250px;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.FontDropdown {
+    width: 100%;
+    text-align: left;
+}
+
+.Icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.IconBox {
+    width: 75%;
+    min-width: 750px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

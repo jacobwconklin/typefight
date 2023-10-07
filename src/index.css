@@ -17,6 +17,8 @@ code {
 
 :root {
   --title-color: white;
+  --user-color: white;
+  --user-color-feint: white;
 }
 
 .full-size {
@@ -27,4 +29,26 @@ code {
 .full-screen {
   min-width: 100vw;
   min-height: calc(100vh - 50px);
+  width: fit-content;
+  height: fit-content;
+}
+
+.IconImage {
+  width: 40px;
+  height: 40px;
+  translate: -3px 3px;
+}
+
+.IconButton {
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  background-color: var(--user-color-feint);
+  margin: 10px;
+  border: 2px solid black;
+}
+
+.ant-color-picker-trigger-text {
+  width: 60px;
 }

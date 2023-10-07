@@ -4,12 +4,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+}
+
+.JoinCode {
+    padding: 15px;
+    margin: 20px;
 }
 
 .CreatePlayer {
+    min-width: 100%;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 50px;
+}
+
+.SubmitButton {
+    margin-top: 50px;
 }
