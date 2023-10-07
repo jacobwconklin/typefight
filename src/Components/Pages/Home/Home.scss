@@ -30,13 +30,14 @@
     align-items: center;
 }
 
-@media screen and (max-width: 1052px) {
-    .OptionBox {
-        height: 100px;
-    }
-}
+// @media screen and (max-width: 1052px) {
+//     .OptionBox {
+//         height: 100px;
+//     }
+// }
 
 .OptionBox {
+    height: 120px;
     width: 200px;
     margin: 50px;
     padding: 15px;

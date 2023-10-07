@@ -15,6 +15,8 @@ https://typefight.azurewebsites.net/
 
 Designed largely with custom CSS, and using the Ant Design component library for React available at: https://ant.design/
 
+Typefaces are installed with Fontsource found here: https://fontsource.org/
+
 ## Available Scripts
 
 In the project directory, you can run:

@@ -10,6 +10,7 @@ const NavHeader = (props) => {
                 {/* Cause side bar to entirely disappear / re-appear */}
                 $$
             </div>
+            {/* Maybe put all player icons in the header... would need to push a context out of player icons or something */}
             <div className='TypeFight'>
                 <Link to={"/"} className='Title'>TypeFight</Link>
             </div>

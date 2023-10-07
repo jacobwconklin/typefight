@@ -20,6 +20,25 @@
         }
     }
 
+    // Available Fonts
+    export const allFonts = [
+        'Black Ops One',
+        'Calibri',
+        'Coda',
+        'Comic Neue',
+        'Federant',
+        'Gabriela',
+        'Grenze Gotisch',
+        'Kalam',
+        'Merriweather',
+        'Nova Square',
+        'Reggae One',
+        'Roboto',
+        'Roboto Serif Variable',
+        'Times New Roman',
+        'Tomorrow'
+    ]
+
     // TODO gave up on dynamically grabbing these
     import bee from './Assets/Icons/bee.svg';
     import knight from './Assets/Icons/black-chess-knight.svg';

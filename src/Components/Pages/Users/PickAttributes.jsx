@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './PickAttributes.scss';
 import ProfileContainer from '../../Reusable/ProfileContainer';
-import allIcons from '../../../Utils';
+import allIcons, { allFonts } from '../../../Utils';
 import { Button, Input, ColorPicker, Dropdown } from 'antd';
 
 // PickAttributes presents reusable component to allow user to pick their alias, 
@@ -16,18 +16,13 @@ const PickAttributes = (props) => {
     const [icon, setIcon] = useState(allIcons[Math.floor(Math.random(0) * allIcons.length)]); // maybe start with a random icon?
     const [color, setColor] = useState("#FFFFFF");
 
-    const availableFonts = [
-        { key: 0, label: 'Calibri'},
-        { key: 1, label: 'Times New Roman'},
-        { key: 2, label: 'Roboto'},
-        { key: 3, label: 'Comic sans'},
-        { key: 4, label: 'Comic sans'},
-        { key: 5, label: 'Comic sans'},
-        { key: 6, label: 'Comic sans'},
-        { key: 7, label: 'Comic sans'},
-        { key: 8, label: 'Comic sans'},
-        { key: 9, label: 'Comic sans'},
-        { key: 10, label: 'Comic sans'}, ];
+    // allows changing root font (and maybe title color if we want)
+    var r = document.querySelector(':root');
+
+    // convert font name array to be used by antd selector
+    const availableFonts = allFonts.map((fontName, index) => {
+        return {key: index, label: fontName};
+    });
 
     const selectFont = ({ key }) => {
         updateFont(availableFonts[key].label);
@@ -42,11 +37,13 @@ const PickAttributes = (props) => {
     const updateColor = (newColor) => {
         props.savePlayer({alias, color: newColor, font, icon: icon.title});
         setColor(newColor);
+        r.style.setProperty('--title-color', newColor);
     }
 
     const updateFont = (newFont) => {
         props.savePlayer({alias, color, font: newFont, icon: icon.title});
         setFont(newFont);
+        r.style.setProperty('--user-font', '\'' + newFont + '\',' + ' sans-serif');
     }
 
     const updateIcon = (newIcon) => {
@@ -56,7 +53,13 @@ const PickAttributes = (props) => {
 
     return (
         <div className='PickAttributes'>
-            <ProfileContainer alias={alias} color={color} font={font} icon={icon.title} />
+            <div className='ProfileAndExample'>
+                <ProfileContainer alias={alias} color={color} font={font} icon={icon.title} />
+                <div className='ExamplePrompt'>
+                    <h3 className='YourFont'>Your Font</h3>
+                    <p>A One, A Two, A Skiddly Diddly Doo! ^_^</p>
+                </div>
+            </div>
             <div className='AliasColorAndFont'>
                 <div className='Alias'>
                     <h1>Enter Your Alias</h1>

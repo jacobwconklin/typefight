@@ -1,3 +1,4 @@
+import { Card } from 'antd';
 import GameCard from './GameCard';
 import './GameSelect.scss';
 
@@ -8,6 +9,10 @@ const GameSelect = (props) => {
         <div className='GameSelect'>
             <div className='GamesBox'>
                 <GameCard game={{title:"TypeFight"}}></GameCard>
+                <Card>
+                    <h1>Quick Keys</h1>
+                    <h3>Competitive</h3>
+                </Card>
             </div>
         </div>
     )

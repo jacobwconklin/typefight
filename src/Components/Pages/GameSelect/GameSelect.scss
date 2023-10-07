@@ -7,3 +7,11 @@
     align-items: flex-start;
     justify-content: center;
 }
+
+.GamesBox {
+    width: 100%;
+    height: 100%;
+    margin: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
