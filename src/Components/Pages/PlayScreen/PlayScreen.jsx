@@ -4,6 +4,7 @@ import { getServerBaseUrl, getStandardHeader } from '../../../Utils';
 import GameSelect from '../GameSelect/GameSelect';
 import NewPlayer from '../Users/NewPlayer';
 import { useParams } from 'react-router-dom';
+import QuickKeys from '../Games/QuickKeys/QuickKeys';
 
 // PlayScreen. Once user clicks "host", "join", or "solo", play screen uses conditional 
 // rendering to control the user's screen rather than traditional router navigation. Manually
@@ -34,19 +35,23 @@ const PlayScreen = (props) => {
   
         //Implementing the setInterval method
         const interval = setInterval(async () => {
-            // fetch session status from backend IF sessionId and playerId exist
-            if (playerId && sessionId) {
-                const result = await fetch(getServerBaseUrl() + "session/status", {
-                    method: "POST",
-                    headers: getStandardHeader(),
-                    body: JSON.stringify({
-                        sessionId
-                    })
-                });
-                const data = await result.json();
-                console.log(data);
-                // TODO determine if there is a need to validate data?
-                setSession(data);
+            try { 
+                // fetch session status from backend IF sessionId and playerId exist
+                if (playerId && sessionId) {
+                    const result = await fetch(getServerBaseUrl() + "session/status", {
+                        method: "POST",
+                        headers: getStandardHeader(),
+                        body: JSON.stringify({
+                            sessionId
+                        })
+                    });
+                    const data = await result.json();
+                    console.log(data);
+                    // TODO determine if there is a need to validate data?
+                    setSession(data);
+                }
+            } catch (error) {
+                console.log("Error fetching session status");
             }
         }, 1000); // TODO will need to tweak this it should run way more often than once per second but we will start slower
   
@@ -62,7 +67,12 @@ const PlayScreen = (props) => {
                 {
                     session.selected_game ? 
                     // display selected game by mapping "selected_game" to JSX component
-                    <p>Game On, Game: {session.selected_game}</p>
+                    (
+                        session.selected_game === "Quick Keys" ? 
+                        <QuickKeys />
+                        :
+                        <p>game not supported</p>
+                    )
                     :
                     // else determine if player already created
                     (

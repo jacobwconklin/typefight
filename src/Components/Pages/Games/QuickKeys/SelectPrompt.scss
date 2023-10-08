@@ -1,0 +1,50 @@
+// import material library if I settle on one
+
+.SelectPrompt {
+    min-width: 100%;
+}
+
+.Filters {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(218, 186, 99);
+    padding: 30px;
+    border-bottom: 2px solid black;
+}
+
+.LengthFilter {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.CategoryFilter {
+    display: flex;
+    flex-direction: column;
+}
+
+.Prompts {
+    margin: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.PromptCard {
+    margin: 25px;
+    border: 1px solid black;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(220, 255, 219);
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 1px 2px -2px rgba(0,0,0,.16), 0 3px 6px 0 rgba(0,0,0,.12), 0 5px 12px 4px rgba(0,0,0,.09);
+    }
+}
+
+.PromptCard > * {
+    margin: 5px 0px 5px 15px;
+}

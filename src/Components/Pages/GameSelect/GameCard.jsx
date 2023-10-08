@@ -1,5 +1,5 @@
 import './GameCard.scss';
-import TypeFightImage from '../../../Assets/Games/TypeFight.jpg';
+import TypeFightImage from '../../../Assets/GameCards/TypeFight.jpg';
 
 // GameCard to show one game (with picture and description)
 const GameCard = (props) => {

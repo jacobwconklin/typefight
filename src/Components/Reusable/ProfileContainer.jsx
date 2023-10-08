@@ -29,7 +29,7 @@ const ProfileContainer = (props) => {
     // todo make it so that when profile icons are clicked tiny icons are emitted or something
 
     return (
-        <div className='ProfileContainer' style={{fontFamily: ('\'' + props.font + '\', ' + 'sans-seriff')}} >
+        <div className='ProfileContainer' style={{fontFamily: ('\'' + props.font + '\', sans-seriff')}} >
             <div className='ExtraColor' style={{backgroundColor: fadedBackgroundColor}}>
                 <div className='Content'>
                     <Button className='IconButton' style={{backgroundColor: props.color}}

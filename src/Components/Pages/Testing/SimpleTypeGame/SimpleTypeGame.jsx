@@ -171,7 +171,7 @@ const SimpleTypeGame = (props) => {
                                         If they type the wrong letter have that letter pop up randomly on the screen for a second
                                     */
                                 <input
-                                value={textInput}
+                                    value={textInput}
                                     style={{fontSize:'x-large', width:"425px", height:'175px', padding:'25px'}}
                                     onChange={(e) => {
                                         e.preventDefault();

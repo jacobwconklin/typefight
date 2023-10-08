@@ -6,6 +6,8 @@ import Playground from './Components/Pages/Testing/Playground/Playground';
 import SimpleTypeGame from './Components/Pages/Testing/SimpleTypeGame/SimpleTypeGame';
 import PlayScreen from './Components/Pages/PlayScreen/PlayScreen';
 
+// TODO remove route games to GameSelect screen when I don't need to edit that screen anymore
+
 // Router
 const Router = (props) => {
 

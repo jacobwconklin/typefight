@@ -43,7 +43,7 @@ const PickAttributes = (props) => {
     const updateFont = (newFont) => {
         props.savePlayer({alias, color, font: newFont, icon: icon.title});
         setFont(newFont);
-        r.style.setProperty('--user-font', '\'' + newFont + '\',' + ' sans-serif');
+        r.style.setProperty('--user-font', ('\'' + newFont + '\', sans-serif'));
     }
 
     const updateIcon = (newIcon) => {
