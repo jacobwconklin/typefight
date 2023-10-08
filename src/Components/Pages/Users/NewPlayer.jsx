@@ -58,7 +58,6 @@ const NewPlayer = (props) => {
         <div className='NewPlayer full-screen' 
             style={{backgroundColor: getBackgroundColor()}}
         >
-            <h1>{playerType}</h1>
             {
                 // if player already has playerId and sessionId show them the party screen, otherwise
                 // have them pick their attributes and submit to set their player
@@ -69,7 +68,7 @@ const NewPlayer = (props) => {
                     {
                         playerType === "join" && 
                         <div className='JoinCode'>
-                            <h2>Put in join code!</h2>
+                            <h2>join code:</h2>
                             <Input
                                 defaultValue={props.code ? props.code : ""}
                                 type="text"
@@ -78,7 +77,7 @@ const NewPlayer = (props) => {
                                     e.preventDefault();
                                     setJoin_code(e.target.value.trim()); 
                                 }}
-                                placeholder='Funny Name Here' 
+                                placeholder='abcdefgh' 
                             />
                         </div> 
                     }

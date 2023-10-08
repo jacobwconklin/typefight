@@ -11,9 +11,7 @@ import { SessionContext } from '../../PlayScreen/PlayScreen';
 const QuickKeys = (props) => {
 
     // begin pulling quick-keys status for info on game, and for showing screen 
-    const [gameStatus, setGameStatus] = useState({
-
-    });
+    const [gameStatus, setGameStatus] = useState({});
     const [selectedPrompt, setSelectedPrompt] = useState(null);
     const [gameCompleted, setGameCompleted] = useState(false);
     const { sessionId, playerId } = useContext(SessionContext);
@@ -45,6 +43,10 @@ const QuickKeys = (props) => {
                         console.log("completed: ", finishedCount);
                         setGameCompleted(data.results.length === finishedCount);
                     }
+                    if (data.prompt) {
+                        // data.prompt will be the actual String of the prompt
+                        setSelectedPrompt(data.prompt);
+                    }
 
                 }
             } catch (error) {
@@ -67,7 +69,7 @@ const QuickKeys = (props) => {
                         <Gameplay prompt={selectedPrompt} progress={gameStatus && gameStatus.results ? gameStatus.results : null} />
                 )
                 :
-                <SelectPrompt selectPrompt={setSelectedPrompt} />
+                <SelectPrompt/>
             }
         </div>
     )

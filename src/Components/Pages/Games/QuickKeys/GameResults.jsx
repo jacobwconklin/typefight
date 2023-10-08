@@ -1,20 +1,99 @@
+import { Button, Table } from 'antd';
 import './GameResults.scss';
+import { useContext } from 'react';
+import { SessionContext } from '../../PlayScreen/PlayScreen';
+import ProfileContainer from '../../../Reusable/ProfileContainer';
 
 // GameResults
 const GameResults = (props) => {
 
+    // props.results holds the results array of the game
+    // each result object looks like: 
+    /*
+    {
+        index: #,
+        time: #,
+        player: {
+            alias: "john doe",
+            icon: "lizard",
+            font: "Calibri",
+            color: "#FFFFFF"
+        }
+    }
+    */
+
+    const {session} = useContext(SessionContext);
+
+    // replay the same game
+    // set everyone's time to undefined and indicies to 0
+    const rematch = async () => {
+
+    }
+
+    // pick a new prompt
+    // set everyone's time to undefined and indicies to 0
+    // and set quickkeysgame's prompt to undefined
+    const pickNewPrompt = async () => {
+    
+    }
+
+    // pick new game
+    // set session's selected_game to undefined
+    const pickNewGame = async () => {
+
+    }
+
+    // Table information 
+    const columns = [
+        {
+            title: 'Rank',
+            dataIndex: 'key',
+            rowScope: 'row',
+        }, 
+        {
+            title: 'Alias',
+            dataIndex: 'alias',
+            key: 'alias'
+        },
+        // TODO not sure if I can plug in jsx into the datasource to plug in icons...
+        {
+            title: 'Time',
+            dataIndex: 'time',
+            key: 'time'
+        },
+    ]
+
     return (
         <div className='GameResults'>
-            {
-                // TODO put into table
-                props.results && 
-                props.results.sort().map(result => (
-                    <div style={{padding: '50px'}}>
-                        <span>Alias: {result.player.alias} </span>
-                        <span>Time: {"" + Math.floor(result.time / 1000) + "." + result.time % 1000 + " Seconds"} </span>
-                    </div>
-                ))
-            }
+            <h1>RESULTS ARE IN</h1>
+            <Table className='ResultTable' 
+                pagination={false}
+                columns={columns} 
+                dataSource={props.results.sort((a, b) => a.time < b.time ).map((res, index) => (
+                    {
+                        key: "" + (index + 1),
+                        time: ("" + Math.floor(res.time / 1000) + "." + res.time % 1000 + " Seconds"),
+                        alias: res.player.alias
+                    }
+                ))} 
+            />
+            <div className='ButtonRow'>
+                <Button onClick={rematch}>Rematch</Button>
+                <Button onClick={pickNewPrompt}>New Prompt</Button>
+                <Button onClick={pickNewGame}>New Game</Button>
+            </div>
+            <div className='SessionPlayers'>
+                {
+                    session.players.map(player => (
+                        <ProfileContainer
+                            alias={player.alias}
+                            color={player.color}
+                            font={player.font}
+                            icon={player.icon}
+                        />
+                    ))
+                }
+            </div>
         </div>
     )
 }

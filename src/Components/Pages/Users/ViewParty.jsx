@@ -42,8 +42,8 @@ const ViewParty = (props) => {
                     <div className='ShowJoinCode'>
                         <h2>Join Code Is:</h2>
                         <h1>{props.join_code}</h1>
-                        <h2>Share With This Link:</h2>
-                        <p className='JoinLink'>https://typefight.azurewebsites.net/play/join/{props.join_code}</p>
+                        {/* Join link doesn't work because it is SPA <h2>Share With This Link:</h2>
+                        <p className='JoinLink'>https://typefight.azurewebsites.net/play/join/{props.join_code}</p> */}
                     </div>
                 }
                 <h1>{session.players.length} Player{session.players.length > 1 ? "s Are" : " Is "} In The Session</h1>
@@ -71,6 +71,7 @@ const ViewParty = (props) => {
                 </div>
                 :
                 <div className='SessionLoading full-size'>
+                    <br></br>
                     <Spin tip="Loading" size="large"></Spin>
                 </div>
             }

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './SelectPrompt.scss';
 import { Select } from 'antd';
 import { getServerBaseUrl, getStandardHeader } from '../../../../Utils';
+import { SessionContext } from '../../PlayScreen/PlayScreen';
 
 // SelectPrompt
 const SelectPrompt = (props) => {
@@ -9,6 +10,8 @@ const SelectPrompt = (props) => {
     const [prompts, setPrompts] = useState([]);
     const [length, setLength] = useState("All");
     const [category, setCategory] = useState("All");
+
+    const {sessionId} = useContext(SessionContext);
 
     const pullPrompts = async (lengthFilter, categoryFilter) => {
         const result = await fetch(getServerBaseUrl() + "quick-keys/prompts", {
@@ -37,6 +40,21 @@ const SelectPrompt = (props) => {
         }
         getAllPrompts();
     }, []);
+
+    // Picks a prompt when clicked by someone
+    const pickThisPrompt = async (prompt) => {
+        // post prompt to server
+        const result = await fetch(getServerBaseUrl() + "quick-keys/prompt", {
+            method: "POST",
+            headers: getStandardHeader(),
+            body: JSON.stringify({
+                promptId: prompt._id,
+                sessionId
+            })
+        });
+        const data = await result.json();
+        console.log(data); 
+    }
 
     return (
         <div className='SelectPrompt'>
@@ -82,11 +100,11 @@ const SelectPrompt = (props) => {
                     // todo could set background color based on length or category
                     prompts.map(prompt => (
                         <div className='PromptCard'
-                            onClick={() => {props.selectPrompt(prompt)}}
+                            onClick={() => {pickThisPrompt(prompt)}}
                         >
                             <h2>{prompt.title}</h2>
-                            <h3>{prompt.author ? prompt.author : "Unknown"}</h3>
-                            <h3>{prompt.category}</h3>
+                            <h3>{prompt.category} by {prompt.author ? prompt.author : "Unknown"}</h3>
+                            <h3>{prompt.prompt.length} Characters</h3>
                         </div>
                     ))
                 }

@@ -9,7 +9,7 @@ import { getServerBaseUrl, getStandardHeader } from '../../../../Utils';
 // Gameplay
 const Gameplay = (props) => {
 
-    // props.prompt holds the prompt object to display, 
+    // props.prompt holds the prompt string to display, 
     // and props.results (may be null) holds the results array where
     // we can see the index each player has reached to place their Icons (eventually)
 
@@ -26,8 +26,8 @@ const Gameplay = (props) => {
 
     // TODO Start with a 3 2 1 countdown here on mount  
     useEffect(() => {
-        setEntire_length(props.prompt.prompt.length);
-        setRemainingText(props.prompt.prompt);
+        setEntire_length(props.prompt ? props.prompt.length : 0);
+        setRemainingText(props.prompt ? props.prompt : "");
         setTimeout(() => {
             setCountdown("3");
             setTimeout(() => {
@@ -42,7 +42,7 @@ const Gameplay = (props) => {
                 }, 1000)
             }, 1000)
         })
-    }, [props.prompt.prompt]);
+    }, [props.prompt]);
 
     // essentially handles a correct letter being typed. Updates the model on the back-end and state of front-end
     const updatePlayerProgress = (typed_index) => {
