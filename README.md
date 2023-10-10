@@ -51,3 +51,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## Future Plans:
+
+1) Adopt Web-socket method of statusing back-end rather than short polling endpoints (will also allow easy way to deal with
+deleting user information when they leave the site)

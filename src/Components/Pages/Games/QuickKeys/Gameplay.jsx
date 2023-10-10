@@ -3,14 +3,18 @@ import { useContext, useEffect, useState } from 'react';
 import './Gameplay.scss';
 import { SessionContext } from '../../PlayScreen/PlayScreen';
 import ProfileContainer from '../../../Reusable/ProfileContainer';
-import { Input } from 'antd';
-import { getServerBaseUrl, getStandardHeader } from '../../../../Utils';
+import { Button, Input } from 'antd';
+import allIcons, { getServerBaseUrl, getStandardHeader } from '../../../../Utils';
+import bad1 from '../../../../Assets/Sounds/Effects/bad1.mp3';
+import bad2 from '../../../../Assets/Sounds/Effects/bad2.mp3';
+import bad3 from '../../../../Assets/Sounds/Effects/bad3.mp3';
+import useSound from 'use-sound';
 
 // Gameplay
 const Gameplay = (props) => {
 
     // props.prompt holds the prompt string to display, 
-    // and props.results (may be null) holds the results array where
+    // and props.progress (may be null) holds the results array where
     // we can see the index each player has reached to place their Icons (eventually)
 
     const {session, playerId} = useContext(SessionContext);
@@ -23,6 +27,11 @@ const Gameplay = (props) => {
     const [remainingText, setRemainingText] = useState("");
     const [entire_length, setEntire_length] = useState(0);
     const [textInput, setTextInput] = useState("");
+
+    // set up sound effects for wrong-letters pressed
+    const [playBad1] = useSound(bad1);
+    const [playBad2] = useSound(bad2);
+    const [playBad3] = useSound(bad3);
 
     // TODO Start with a 3 2 1 countdown here on mount  
     useEffect(() => {
@@ -78,9 +87,6 @@ const Gameplay = (props) => {
         }
     }
 
-
-
-
     const [wrongLetter, setWrongLetter] = useState("");
     const [randomFromTop, setRandomFromTop] = useState("0px");
     const [randomFromLeft, setRandomFromLeft] = useState("0px");
@@ -95,6 +101,14 @@ const Gameplay = (props) => {
         setRandomFromTop((Math.random() * (window.innerHeight - 400)) + "px");
         setRandomFromLeft(((Math.random() * fromLeft) + "px"));
         setWrongLetter(letterTyped);
+        const randomBadSound = Math.random();
+        if (randomBadSound < 0.33) {
+            playBad1();
+        } else if (randomBadSound < 0.66) {
+            playBad2();
+        } else {
+            playBad3();
+        }
     }
 
     return (
@@ -104,13 +118,42 @@ const Gameplay = (props) => {
                 <div className='PromptDisplay'>
                     {/* <span className='Typed user-font'>{typedText}</span> 
                     TODO Could show this as highlighted if I could get it to scroll but I can't yet */}
-                    <span className='Remaining user-font'>{remainingText}</span>
+                    <span className='HighlightedCharacter user-font'>
+                        {remainingText && remainingText[0] ? remainingText[0] : ""}
+                    </span>
+                    <span className='Remaining user-font'>
+                        {remainingText && remainingText.length > 1 ? remainingText.substring(1) : ""}
+                    </span>
                 </div>
                 <div className='ProgressDisplay'>
-                    {/* Display all player icons  with their color going along the progress bar */}
+                    {/* Display all player icons with their color going along the progress bar */}
                     <div className='ProgressBar'>
-
+                        <div className='PlayerProgress'
+                            style={{
+                                width: ((1 - (remainingText.length / entire_length)) * 500) + "px" , 
+                                backgroundColor: `rgb(${256 * (remainingText.length / entire_length)}, ${256 * (1 - (remainingText.length / entire_length)) }, 0)`}}
+                        >
+                        </div>
                     </div>
+                    {
+                        props.progress && props.progress.sort((a, b) => a.index < b.index).map(result => (
+                            <div className='PlayerProgressIcon'
+                                style={{ 
+                                    translate: `${Math.floor((result.index / entire_length) * 500) - 33}px -165px`,
+                                    zIndex: result.index + 2
+                            }}
+                            >
+                                <div className='ProgressTail' style={{
+                                    backgroundColor: result.player.color,
+                                }} ></div>
+                                <Button className='IconButton' style={{
+                                        backgroundColor: result.player.color,
+                                    }}>
+                                    <img src={allIcons.find(icon => icon.title === result.player.icon).src} alt={result.player.icon} className='IconImage' />
+                                </Button>
+                            </div>
+                        ))
+                    }
                 </div>
                 <div className='TypeHere'>
                     <Input 

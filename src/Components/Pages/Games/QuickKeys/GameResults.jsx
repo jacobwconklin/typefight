@@ -3,6 +3,7 @@ import './GameResults.scss';
 import { useContext } from 'react';
 import { SessionContext } from '../../PlayScreen/PlayScreen';
 import ProfileContainer from '../../../Reusable/ProfileContainer';
+import { getServerBaseUrl, getStandardHeader } from '../../../../Utils';
 
 // GameResults
 const GameResults = (props) => {
@@ -22,25 +23,51 @@ const GameResults = (props) => {
     }
     */
 
-    const {session} = useContext(SessionContext);
+    const {session, sessionId} = useContext(SessionContext);
 
     // replay the same game
     // set everyone's time to undefined and indicies to 0
     const rematch = async () => {
-
+        await fetch(getServerBaseUrl() + "quick-keys/rematch", {
+            method: "POST",
+            headers: getStandardHeader(),
+            body: JSON.stringify({
+                sessionId
+            })
+        });
     }
 
     // pick a new prompt
     // set everyone's time to undefined and indicies to 0
     // and set quickkeysgame's prompt to undefined
     const pickNewPrompt = async () => {
-    
+        await fetch(getServerBaseUrl() + "quick-keys/new", {
+            method: "POST",
+            headers: getStandardHeader(),
+            body: JSON.stringify({
+                sessionId
+            })
+        });
     }
 
     // pick new game
     // set session's selected_game to undefined
     const pickNewGame = async () => {
-
+        await fetch(getServerBaseUrl() + "session/leave-game", {
+            method: "POST",
+            headers: getStandardHeader(),
+            body: JSON.stringify({
+                sessionId
+            })
+        });
+        // delete quick keys game data from database
+        await fetch(getServerBaseUrl() + "quick-keys/wipe", {
+            method: "POST",
+            headers: getStandardHeader(),
+            body: JSON.stringify({
+                sessionId
+            })
+        });
     }
 
     // Table information 

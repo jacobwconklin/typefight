@@ -23,6 +23,11 @@
     flex-direction: column;
 }
 
+.LeaveButton {
+    display: flex;
+    align-items: flex-end;
+}
+
 .Prompts {
     margin: 50px;
     display: flex;

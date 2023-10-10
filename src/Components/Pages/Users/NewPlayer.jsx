@@ -65,6 +65,8 @@ const NewPlayer = (props) => {
                 <ViewParty isHost={playerType === 'host'} join_code={join_code}/>
                 :
                 <div className='CreatePlayer'>
+                    <PickAttributes savePlayer={savePlayer}/>
+                    <br></br>
                     {
                         playerType === "join" && 
                         <div className='JoinCode'>
@@ -81,7 +83,6 @@ const NewPlayer = (props) => {
                             />
                         </div> 
                     }
-                    <PickAttributes savePlayer={savePlayer}/>
                     <br></br>
                     <Button 
                         className='SubmitButton'

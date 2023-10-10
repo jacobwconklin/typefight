@@ -43,8 +43,8 @@ const QuickKeys = (props) => {
                         console.log("completed: ", finishedCount);
                         setGameCompleted(data.results.length === finishedCount);
                     }
-                    if (data.prompt) {
-                        // data.prompt will be the actual String of the prompt
+                    if (data) {
+                        // data.prompt will be the actual String of the prompt or null if selecting a new prompt.
                         setSelectedPrompt(data.prompt);
                     }
 

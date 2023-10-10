@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import './SelectPrompt.scss';
-import { Select } from 'antd';
+import { Button, Select } from 'antd';
 import { getServerBaseUrl, getStandardHeader } from '../../../../Utils';
 import { SessionContext } from '../../PlayScreen/PlayScreen';
 
@@ -56,6 +56,26 @@ const SelectPrompt = (props) => {
         console.log(data); 
     }
 
+    // pick new game
+    // set session's selected_game to undefined
+    const leaveGame = async () => {
+        await fetch(getServerBaseUrl() + "session/leave-game", {
+            method: "POST",
+            headers: getStandardHeader(),
+            body: JSON.stringify({
+                sessionId
+            })
+        });
+        // delete quick keys game data from database
+        await fetch(getServerBaseUrl() + "quick-keys/wipe", {
+            method: "POST",
+            headers: getStandardHeader(),
+            body: JSON.stringify({
+                sessionId
+            })
+        });
+    }
+
     return (
         <div className='SelectPrompt'>
             <div className='Filters'>
@@ -93,6 +113,11 @@ const SelectPrompt = (props) => {
                         }}
                         style={{width: '200px'}}
                     />
+                </div>
+                <div className='LeaveButton'>
+                    <Button onClick={leaveGame}>
+                        Leave Game
+                    </Button>
                 </div>
             </div>
             <div className='Prompts'>
