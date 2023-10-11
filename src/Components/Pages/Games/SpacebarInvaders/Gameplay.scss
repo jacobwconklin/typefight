@@ -1,0 +1,126 @@
+// import material library if I settle on one
+
+.SpacebarInvadersGameplay {
+
+}
+
+.OuterBounds {
+    background-image: url('../../../../Assets/Games/SpacebarInvaders/space-stars-background.jpg');
+    background-size: contain;
+    background-repeat: repeat;
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+// Maybe use media queries to have several set screen sizes? 
+.GameElements {
+    width: 750px;
+    height: 750px;
+    // background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+    // overflow: hidden; // WILL INCLUDE THIS
+}
+
+.Holder {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    .Radar {
+        grid-column: 1;
+        grid-row: 1;
+        // background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        animation: radar 4s linear infinite;
+    }
+
+    .Planet {
+        height: 50px;
+        width: 50px;
+        grid-column: 1;
+        grid-row: 1;
+    }
+    
+    .Enemy {
+        grid-column: 1;
+        grid-row: 1;
+        transition: translate 0.2s;
+
+        .EnemyImage {
+            transform: rotateZ(50deg);
+        }
+
+        .EnemyText {
+            color: white;
+            margin: 0px;
+        }
+
+    }
+
+    .Missile {
+        grid-column: 1;
+        grid-row: 1;
+        transition: translate 1s;
+
+        .MissileImage {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+}
+
+.TypeHolder {
+    position: absolute;
+    top: 100px;
+    left: calc(50% - 100px);
+    .TypeHere {
+        width: 200px;
+        height: 50px;
+        .TypeInput {
+
+        }
+    }
+}
+
+@keyframes radar {
+    0% {
+        width: 10px;
+        height: 10px;
+        border: 6px solid rgba(0, 128, 0, 0.5);
+    }
+    25% {
+    }
+    50% {
+        border: 5px solid rgba(0, 128, 0, 0.3);
+    }
+    75% {
+    }
+    100% {
+        border: 4px solid rgba(0, 128, 0, 0.1);
+        width: 100%;
+        height: 100%;
+    }
+  }
+
+  @keyframes spin {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    25% {
+    }
+    50% {
+
+    }
+    75% {
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+  }

@@ -112,7 +112,7 @@ const Gameplay = (props) => {
     }
 
     return (
-        <div className='Gameplay '>
+        <div className='QuickKeysGameplay'>
             <div className='GameInfo'>
                 <h1>Type The Fastest To Win!</h1>
                 <div className='PromptDisplay'>

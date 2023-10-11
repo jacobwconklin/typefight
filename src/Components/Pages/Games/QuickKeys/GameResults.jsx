@@ -96,7 +96,7 @@ const GameResults = (props) => {
             <Table className='ResultTable' 
                 pagination={false}
                 columns={columns} 
-                dataSource={props.results.sort((a, b) => a.time < b.time ).map((res, index) => (
+                dataSource={props.results.sort((a, b) => a.time > b.time ).map((res, index) => ( // TODO wasn't working look into this
                     {
                         key: "" + (index + 1),
                         time: ("" + Math.floor(res.time / 1000) + "." + res.time % 1000 + " Seconds"),

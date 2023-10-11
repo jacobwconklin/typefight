@@ -5,6 +5,7 @@ import { getServerBaseUrl, getStandardHeader } from '../../../../Utils';
 import { SessionContext } from '../../PlayScreen/PlayScreen';
 
 // SelectPrompt
+// TODO could have settings to toggle: matching uppercase, removing punctuation / numbers,
 const SelectPrompt = (props) => {
 
     const [prompts, setPrompts] = useState([]);
@@ -88,7 +89,6 @@ const SelectPrompt = (props) => {
                             {value: 'Tweet', label: 'Tweet'},
                             {value: 'Paragraph', label: 'Paragraph'},
                             {value: 'Short Story', label: 'Short Story'},
-                            {value: 'Novel', label: 'Novel'},
                         ]}
                         onChange={(newValue) => {
                             setLength(newValue);
