@@ -72,6 +72,7 @@ const ViewParty = (props) => {
                 :
                 <div className='SessionLoading full-size'>
                     <br></br>
+                    <div style={{height: '50px', padding: '50px'}}></div>
                     <Spin tip="Loading" size="large"></Spin>
                 </div>
             }

@@ -5,6 +5,7 @@ import GameSelect from '../GameSelect/GameSelect';
 import NewPlayer from '../Users/NewPlayer';
 import { useParams } from 'react-router-dom';
 import QuickKeys from '../Games/QuickKeys/QuickKeys';
+import SpacebarInvaders from '../Games/SpacebarInvaders/SpacebarInvaders';
 
 // PlayScreen. Once user clicks "host", "join", or "solo", play screen uses conditional 
 // rendering to control the user's screen rather than traditional router navigation. Manually
@@ -46,14 +47,14 @@ const PlayScreen = (props) => {
                         })
                     });
                     const data = await result.json();
-                    console.log(data);
+                    // console.log(data);
                     // TODO determine if there is a need to validate data?
                     setSession(data);
                 }
             } catch (error) {
                 console.log("Error fetching session status");
             }
-        }, 1000); // TODO will need to tweak this it should run way more often than once per second but we will start slower
+        }, 1500); // TODO will need to tweak this it should run way more often than once per second but we will start slower
   
         //Clearing the interval
         return () => clearInterval(interval);
@@ -71,7 +72,12 @@ const PlayScreen = (props) => {
                         session.selected_game === "Quick Keys" ? 
                         <QuickKeys />
                         :
-                        <p>game not supported</p>
+                        (
+                            session.selected_game === "Spacebar Invaders" ? 
+                            <SpacebarInvaders />
+                            :
+                            <p>game not supported</p>
+                        )
                     )
                     :
                     // else determine if player already created

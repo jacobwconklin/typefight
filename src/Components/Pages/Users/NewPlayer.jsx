@@ -33,7 +33,7 @@ const NewPlayer = (props) => {
     const submit = async () => {
         // make sure join code is valid and player successfully enters game
         // need to recieve back sessionId and playerId and put them into context
-        const result = await fetch(getServerBaseUrl() + "/users/" + playerType, {
+        const result = await fetch(getServerBaseUrl() + "users/" + playerType, {
             method: "POST",
             headers: getStandardHeader(),
             body: JSON.stringify({

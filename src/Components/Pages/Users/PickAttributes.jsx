@@ -65,6 +65,7 @@ const PickAttributes = (props) => {
                     <h1>Enter Your Alias</h1>
                     <Input
                         className='AliasInput'
+                        autoFocus
                         type="text"
                         maxLength={20}
                         onChange={e => {

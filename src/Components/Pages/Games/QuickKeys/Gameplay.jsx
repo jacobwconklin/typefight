@@ -157,6 +157,7 @@ const Gameplay = (props) => {
                 </div>
                 <div className='TypeHere'>
                     <Input 
+                        autoFocus
                         placeholder='Type Here'
                         style={{height: '70px', fontSize: 'x-large'}}
                         disabled={countdown != null || !!finalTime}
