@@ -6,10 +6,24 @@
     align-items: center;
 }
 
-.JoinCode {
-    padding: 15px;
-    margin: 20px;
-    width: 150px;
+.JoinAndSubmit {
+    display: flex;
+    align-items: flex-end;
+
+    .JoinCode {
+        padding: 15px;
+        margin: 20px;
+        width: 150px;
+    }
+
+    .SubmitButton {
+        margin: 35px;
+    }
+}
+
+
+.SubmitButton {
+    margin: 50px;
 }
 
 .CreatePlayer {
@@ -18,8 +32,4 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.SubmitButton {
-    margin: 25px;
 }

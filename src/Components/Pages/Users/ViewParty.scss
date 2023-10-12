@@ -18,11 +18,22 @@
     align-items: center;
 }
 
-.ShowJoinCode {
-    text-align: center;
-    margin: 20px;
-    border-bottom: 1px solid black;
+.JoinCodeAndBegin {
+    display: flex;
+    align-items: flex-end;
+
+    .ShowJoinCode {
+        text-align: center;
+        margin: 20px;
+        border-bottom: 1px solid black;
+    }
+
+    .BeginButton {
+        margin: 40px;
+    }
 }
+
+
 
 .SessionPlayers {
     width: 100%;

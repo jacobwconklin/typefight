@@ -39,18 +39,27 @@ const ViewParty = (props) => {
                 <div className='SessionLoaded full-size'>
                 {
                         props.isHost && 
-                    <div className='ShowJoinCode'>
-                        <h2>Join Code Is:</h2>
-                        <h1>{props.join_code}</h1>
-                        {/* Join link doesn't work because it is SPA <h2>Share With This Link:</h2>
-                        <p className='JoinLink'>https://typefight.azurewebsites.net/play/join/{props.join_code}</p> */}
-                    </div>
+                        <div className='JoinCodeAndBegin'> 
+                            <div className='ShowJoinCode'>
+                                <h2>Join Code Is:</h2>
+                                <h1>{props.join_code}</h1>
+                                {/* Join link doesn't work because it is SPA <h2>Share With This Link:</h2>
+                                <p className='JoinLink'>https://typefight.azurewebsites.net/play/join/{props.join_code}</p> */}
+                            </div>
+                            <Button className='BeginButton'
+                                disabled={session.players.length < 2}
+                                onClick={beginSession}
+                            >
+                                Begin
+                            </Button>
+                        </div>
                 }
                 <h1>{session.players.length} Player{session.players.length > 1 ? "s Are" : " Is "} In The Session</h1>
                 <div className='SessionPlayers'>
                     {
                         session.players.map(player => (
                             <ProfileContainer
+                                key={player.alias}
                                 alias={player.alias}
                                 color={player.color}
                                 font={player.font}
@@ -59,15 +68,6 @@ const ViewParty = (props) => {
                         ))
                     }
                 </div>
-                {
-                    props.isHost && 
-                    <Button
-                        disabled={session.players.length < 2}
-                        onClick={beginSession}
-                    >
-                        Begin
-                    </Button>
-                }
                 </div>
                 :
                 <div className='SessionLoading full-size'>

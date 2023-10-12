@@ -68,29 +68,38 @@ const NewPlayer = (props) => {
                     <PickAttributes savePlayer={savePlayer}/>
                     <br></br>
                     {
-                        playerType === "join" && 
-                        <div className='JoinCode'>
-                            <h2>join code:</h2>
-                            <Input
-                                defaultValue={props.code ? props.code : ""}
-                                type="text"
-                                maxLength={8}
-                                onChange={e => {
-                                    e.preventDefault();
-                                    setJoin_code(e.target.value.trim()); 
-                                }}
-                                placeholder='abcdefgh' 
-                            />
-                        </div> 
+                        playerType === "join" ? 
+                        <div className='JoinAndSubmit'>
+                            <div className='JoinCode'>
+                                <h2>join code:</h2>
+                                <Input
+                                    defaultValue={props.code ? props.code : ""}
+                                    type="text"
+                                    maxLength={8}
+                                    onChange={e => {
+                                        e.preventDefault();
+                                        setJoin_code(e.target.value.trim()); 
+                                    }}
+                                    placeholder='abcdefgh' 
+                                />
+                            </div> 
+                            <Button    
+                                className='SubmitButton'
+                                disabled={!playerInfo || !playerInfo.alias || ( playerType === 'join' && !join_code)} 
+                                onClick={submit}
+                            > 
+                                Submit
+                            </Button>
+                        </div>
+                        :
+                        <Button 
+                            className='SubmitButton'
+                            disabled={!playerInfo || !playerInfo.alias || ( playerType === 'join' && !join_code)} 
+                            onClick={submit}
+                        > 
+                            Submit
+                        </Button>
                     }
-                    <br></br>
-                    <Button 
-                        className='SubmitButton'
-                        disabled={!playerInfo || !playerInfo.alias || ( playerType === 'join' && !join_code)} 
-                        onClick={submit}
-                    > 
-                        Submit
-                    </Button>
                 </div>
             }
         </div>

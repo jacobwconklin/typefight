@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './PlayScreen.scss';
 import { getServerBaseUrl, getStandardHeader } from '../../../Utils';
 import GameSelect from '../GameSelect/GameSelect';
@@ -6,6 +6,7 @@ import NewPlayer from '../Users/NewPlayer';
 import { useParams } from 'react-router-dom';
 import QuickKeys from '../Games/QuickKeys/QuickKeys';
 import SpacebarInvaders from '../Games/SpacebarInvaders/SpacebarInvaders';
+import { BackgroundAudioContext } from '../../../App';
 
 // PlayScreen. Once user clicks "host", "join", or "solo", play screen uses conditional 
 // rendering to control the user's screen rather than traditional router navigation. Manually
@@ -31,6 +32,8 @@ const PlayScreen = (props) => {
         selected_game: null,
         players: []
     });
+
+    const {backgroundMusic, setBackgroundMusic} = useContext(BackgroundAudioContext);
   
     useEffect(() => {
   
@@ -50,6 +53,14 @@ const PlayScreen = (props) => {
                     // console.log(data);
                     // TODO determine if there is a need to validate data?
                     setSession(data);
+                    // set background music audio based on game being played
+                    if (!data?.selected_game && backgroundMusic !== "home") {
+                        setBackgroundMusic("home");
+                    } else if (data?.selected_game === "Quick Keys" && backgroundMusic !== "quickKeys") {
+                        setBackgroundMusic("quickKeys");
+                    } else if (data?.selected_game === "Spacebar Invaders" && backgroundMusic !== "spacebarInvaders") {
+                        setBackgroundMusic("spacebarInvaders");
+                    }
                 }
             } catch (error) {
                 console.log("Error fetching session status");
@@ -58,7 +69,7 @@ const PlayScreen = (props) => {
   
         //Clearing the interval
         return () => clearInterval(interval);
-    }, [session, sessionId, playerId]);
+    }, [session, sessionId, playerId, backgroundMusic, setBackgroundMusic]);
 
     return (
         <div className='PlayScreen'>

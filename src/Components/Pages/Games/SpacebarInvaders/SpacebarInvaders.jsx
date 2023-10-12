@@ -55,10 +55,17 @@ const SpacebarInvaders = (props) => {
             {
                 // For now ignoring customization screen as an option going straight into game
 
-                gameStatus && gameStatus.health && gameStatus.health > 0 ?
+                gameStatus?.health > 0 ?
                 <Gameplay status={gameStatus} />
-                :
-                <GameOver wave={gameStatus.wave} />
+                : 
+                (
+                    gameStatus?.health <= 0 ?
+                    <GameOver wave={gameStatus.wave} />
+                    :
+                    <div className='Loading full-screen' style={{backgroundColor: 'black'}}>
+
+                    </div>
+                )
             }
         </div>
     )

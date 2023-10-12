@@ -9,20 +9,37 @@
     height: 50px;
     background-color: rgb(24, 24, 24); // rgb(30, 0, 0);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     z-index: 4;
 
-    .SideBarButton {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        padding-left: 15px;
-        padding-top: 15px;
-        color: white;
+    .NavBarButtons {
+        width: 150px;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: space-around;
+        
+        .NavBarButton {
+            padding: 10px;
+
+        }
+
+        .NavBarButton > * {
+            color: white;
+            width: 30px;
+            height: 30px;
+        }
     }
+
+    // .SideBarButton {
+    //     position: absolute;
+    //     top: 0px;
+    //     left: 0px;
+    //     padding-left: 15px;
+    //     padding-top: 15px;
+    //     color: white;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
 
     .TypeFight {
         height: 50px;
@@ -40,5 +57,9 @@
         &:hover {
             background-color: rgb(48, 48, 48);
         }
+    }
+
+    .PlayerNavIcon {
+        width: 150px;
     }
 }

@@ -33,6 +33,7 @@ const Gameplay = (props) => {
     const [waveReset, setWaveReset] = useState(false);
     // track blown up enemies so they don't get shot with missiles again
     const [destroyedEnemyIds, setDestroyedEnemyIds] = useState([]);
+    const [betweenWaves, setBetweenWaves] = useState(false);
 
     // My concern is that changing the array will entirely repaint the enemies so they will jump positions when
     // one is removed. What I could do is just change their translate style based on their html id (the enemy id),
@@ -45,6 +46,7 @@ const Gameplay = (props) => {
             setDisplayEnemies(props.status.enemies);
             setUpdatedLocations(props.status.enemies);
             setWaveReset(false);
+            setBetweenWaves(false);
         }
         if (props?.status?.enemies && props.status.enemies.length === 0 && displayEnemies.length !== 0 && !waveReset ) {
             // CLEAR DISPLAY ENEMIES WAVE IS OVER
@@ -55,6 +57,7 @@ const Gameplay = (props) => {
                 setUpdatedLocations([]);
                 setDestroyedEnemyIds([]);
                 setWaveReset(false);
+                setBetweenWaves(true);
             }, 1000);
         } else if (props?.status?.enemies) {
             // update last known locations (used to shoot missiles at)
@@ -103,7 +106,7 @@ const Gameplay = (props) => {
             console.log("Issue with props.status.enemies in Spacebar Invaders Gameplay");
         }
     }, [setDisplayEnemies, props?.status?.enemies, displayEnemies, destroyedEnemyIds, waveReset, setWaveReset,
-        setDestroyedEnemyIds, updatedLocations, setUpdatedLocations]);
+        setDestroyedEnemyIds, updatedLocations, setUpdatedLocations, setBetweenWaves]);
     
     const [firedMissiles, setFiredMissiles] = useState([]);
 
@@ -167,7 +170,8 @@ const Gameplay = (props) => {
                                     <img className='EnemyImage' src={singleAsteroid} alt='Enemy Asteroid' 
                                         // Set spin animation speed randomly, may not want all icons to spin
                                         // ie ufo's probably wont maybe they will just wobble. 
-                                        style={{animation: `spin ${Math.floor(Math.random() * 3) + 2}s linear infinite`}}
+                                        // TODO convert enemy word length to number for spin
+                                        style={{animation: `spin ${4}s linear infinite`}} 
                                     />
                                     <p className='EnemyText user-font'>{enemy.word}</p>
                                 </div>
@@ -214,6 +218,11 @@ const Gameplay = (props) => {
                                 }
                             }}
                         />
+                        {
+                            // TODO figure out why this doesn't work
+                            betweenWaves && 
+                            <h1 style={{color: 'white'}} >Wave Complete</h1>
+                        }
                 </div>
             </div>
         </div>
