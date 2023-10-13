@@ -125,6 +125,7 @@ const SelectPrompt = (props) => {
                     // todo could set background color based on length or category
                     prompts.map(prompt => (
                         <div className='PromptCard'
+                            key={prompt.title}
                             onClick={() => {pickThisPrompt(prompt)}}
                         >
                             <h2>{prompt.title}</h2>

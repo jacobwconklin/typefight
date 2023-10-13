@@ -23,13 +23,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@font-face {
+  font-family: 'orb';
+  src: url('./Assets/Fonts/orbitron-latin-wght-normal.77094d4878a40a53ce9c.woff2');
+}
+
+@font-face {
+  font-family: 'Grenze Goat';
+  src: url('./Assets/Fonts/grenze-gotisch-latin-400-normal.45daba7655211617dc66.woff2');
+}
+
 /* Can add title-font class to any element to get it to use title font instead of body font, and can add user-font lass similarly*/
 .title-font {
-  font-family: var(--title-font);
+  // font-family: var(--title-font);
+  font-family: 'orb';
 }
 
 h1 {
-  font-family: var(--title-font);
+  // font-family: var(--title-font);
+  font-family: 'orb';
 }
 
 .user-font {

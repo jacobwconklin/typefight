@@ -9,7 +9,7 @@ import { BackgroundAudioContext } from '../../App';
 // NavHeader
 const NavHeader = (props) => {
 
-    const { musicMuted, setMusicMuted } = useContext(BackgroundAudioContext);
+    const { musicMuted, setMusicMuted, backgroundMusic, setBackgroundMusic } = useContext(BackgroundAudioContext);
 
     return (
         <div className='NavHeader'>
@@ -20,6 +20,9 @@ const NavHeader = (props) => {
                 <div className='NavBarButton'
                     onClick={() => {
                         setMusicMuted(!musicMuted);
+                        if (!backgroundMusic) {
+                            setBackgroundMusic('home');
+                        }
                     }}
                 >
                     {
@@ -32,7 +35,7 @@ const NavHeader = (props) => {
             </div>
             {/* Maybe put all player icons in the header... would need to push a context out of player icons or something */}
             <div className='TypeFight'>
-                <Link to={"/"} className='Title'>TypeFight</Link>
+                <Link to={"/"} className='Title title-font'>TypeFight</Link>
             </div>
             <div className='PlayerNavIcon'>
 

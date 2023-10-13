@@ -22,13 +22,13 @@ const App = () => {
 
   // react-audio-player provides background music with the selected theme stored in state here
   // wrap audio in context to be changeable throughout application.
-  const [backgroundMusic, setBackgroundMusic] = useState("home");
+  const [backgroundMusic, setBackgroundMusic] = useState("");
   const [musicMuted, setMusicMuted] = useState(true);
 
   return (
     <div className="App">
-      <ReactAudioPlayer className='AudioPlayer' 
-        src={nameToMusicMap[backgroundMusic]} 
+      <ReactAudioPlayer className='AudioPlayer'
+        src={ !!backgroundMusic ? nameToMusicMap[backgroundMusic] : null} 
         muted={musicMuted} 
         loop={true}
         autoPlay={true} 

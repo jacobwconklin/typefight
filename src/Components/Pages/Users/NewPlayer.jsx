@@ -85,7 +85,7 @@ const NewPlayer = (props) => {
                             </div> 
                             <Button    
                                 className='SubmitButton'
-                                disabled={!playerInfo || !playerInfo.alias || ( playerType === 'join' && !join_code)} 
+                                disabled={!playerInfo || !playerInfo.alias || !join_code} 
                                 onClick={submit}
                             > 
                                 Submit
@@ -94,7 +94,7 @@ const NewPlayer = (props) => {
                         :
                         <Button 
                             className='SubmitButton'
-                            disabled={!playerInfo || !playerInfo.alias || ( playerType === 'join' && !join_code)} 
+                            disabled={!playerInfo || !playerInfo.alias} 
                             onClick={submit}
                         > 
                             Submit

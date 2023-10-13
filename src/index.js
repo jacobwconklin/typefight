@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 // Imported Fonts
-import '@fontsource-variable/orbitron';
+import './Assets/Fonts/orbitron-latin-wght-normal.77094d4878a40a53ce9c.woff2';
 import '@fontsource/black-ops-one';
 import '@fontsource/nova-square';
 import '@fontsource/merriweather';
