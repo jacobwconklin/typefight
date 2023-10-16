@@ -113,6 +113,8 @@ const Gameplay = (props) => {
     // When an enemy doesn't appear from one status to the next shoot a missile UNLESS 
     // that enemy is within the set range of pixels of earth then just show an explosion on earch
     // spawn and shoot a missile when an enemy doesn't come back
+    // TODO sometimes missiles aren't drawn until they are already on top of enemy, may be better to have an array of missiles
+    // as big as the enemy array with display none then change them to display in the useEffect loop before calling shootMissile so they are seen right away
     const shootMissile = ({x, y, word}) => {
         console.log("called shoot missile");
         const missileId = v4();
@@ -221,7 +223,7 @@ const Gameplay = (props) => {
                         {
                             // TODO figure out why this doesn't work
                             betweenWaves && 
-                            <h1 style={{color: 'white'}} >Wave Complete</h1>
+                            <h1 className='CompleteText' >Wave Complete</h1>
                         }
                 </div>
             </div>

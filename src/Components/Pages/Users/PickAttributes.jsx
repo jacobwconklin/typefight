@@ -21,11 +21,11 @@ const PickAttributes = (props) => {
 
     // convert font name array to be used by antd selector
     const availableFonts = allFonts.map((fontName, index) => {
-        return {key: index, label: fontName};
+        return {key: index, label: <div style={{fontFamily: fontName}}>{fontName}</div>};
     });
 
     const selectFont = ({ key }) => {
-        updateFont(availableFonts[key].label);
+        updateFont(allFonts[key]);
     }
 
     // setters that also pass the information up to NewPlayer parent

@@ -102,6 +102,11 @@
     }
 }
 
+.CompleteText {
+    color: white;
+    transition: all 0.5s;
+}
+
 @keyframes radar {
     0% {
         width: 10px;

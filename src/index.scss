@@ -1,13 +1,12 @@
 @import "@fontsource/merriweather";
-@import '@fontsource/grenze-gotisch';
-@import '@fontsource-variable/orbitron';
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Coda&family=Comic+Neue&family=Federant&family=Gabriela&family=Grenze+Gotisch&family=Kalam&family=Merriweather&family=Nova+Square&family=Orbitron&family=Reggae+One&family=Roboto&family=Roboto+Serif:opsz@8..144&family=Tomorrow&display=swap');
 
 :root {
   --title-color: white;
   --user-color: white;
   --user-color-feint: white;
 
-  --title-font: 'Orbitron Variable';
+  --title-font: 'Orbitron';
   --body-font: 'Roboto';
   --user-font: "Arial";
 }
@@ -24,25 +23,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@font-face {
-  font-family: 'orb';
-  src: url('./Assets/Fonts/orbitron-latin-wght-normal.77094d4878a40a53ce9c.woff2');
-}
-
-@font-face {
-  font-family: 'Grenze Goat';
-  src: url('./Assets/Fonts/grenze-gotisch-latin-400-normal.45daba7655211617dc66.woff2');
-}
-
 /* Can add title-font class to any element to get it to use title font instead of body font, and can add user-font lass similarly*/
 .title-font {
-  // font-family: var(--title-font);
-  font-family: 'orb';
+  font-family: var(--title-font);
 }
 
 h1 {
-  // font-family: var(--title-font);
-  font-family: 'orb';
+  font-family: var(--title-font);
 }
 
 .user-font {
