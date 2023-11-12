@@ -9,6 +9,12 @@
     // transitions to that color. (or leave it white then transition it to what user hovers over
     background-image: url("../../../Assets/Site/digital-rain.gif");
     background-size: cover;
+
+    .HomeKeyboard {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .FadeInGradient {

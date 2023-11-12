@@ -47,6 +47,10 @@ const Gameplay = (props) => {
                         setCountdown(null);
                         // countdown is finished begin timer
                         setTypingTimestamp(new Date());
+                        // focus input for users
+                        setTimeout(() => {
+                            document.getElementById("quickKeysInput").focus();
+                        }, 100);
                     }, 1000)
                 }, 1000)
             }, 1000)
@@ -93,7 +97,6 @@ const Gameplay = (props) => {
 
     // when an incorrect letter is typed LET THE USER KNOW!
     const typedWrongLetter = (letterTyped) => {
-        console.log(wrongLetter);
         let fromLeft = (window.innerWidth - 250);
         if (letterTyped.length > 1) {
             fromLeft = 100;
@@ -157,6 +160,7 @@ const Gameplay = (props) => {
                 </div>
                 <div className='TypeHere'>
                     <Input 
+                        id="quickKeysInput"
                         autoFocus
                         placeholder='Type Here'
                         style={{height: '70px', fontSize: 'x-large'}}
@@ -173,7 +177,6 @@ const Gameplay = (props) => {
                             }
                             // determine between space, correct letter, wrong letter, and backspace
                             else if (key === remainingText[0] || (key === " " && (remainingText[0] === '\n' || remainingText[0] === '\t'))) {
-                                console.log("Got the right letter")
                                 setWrongLetter("");
                                 // back-end only needs to get updated ont he index reached
                                 updatePlayerProgress(typedText.length);

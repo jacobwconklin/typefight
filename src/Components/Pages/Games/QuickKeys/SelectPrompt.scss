@@ -1,11 +1,12 @@
 // import material library if I settle on one
 
 .SelectPrompt {
-    min-width: 100%;
+    
 }
 
 .Filters {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     background-color: rgb(218, 186, 99);
     padding: 30px;
@@ -13,17 +14,20 @@
 }
 
 .LengthFilter {
+    margin: 0px 5px 0px 5px;
     display: flex;
     flex-direction: column;
 }
 
 
 .CategoryFilter {
+    margin: 0px 5px 0px 5px;
     display: flex;
     flex-direction: column;
 }
 
 .LeaveButton {
+    margin: 20px 20px 0px 20px;
     display: flex;
     align-items: flex-end;
 }

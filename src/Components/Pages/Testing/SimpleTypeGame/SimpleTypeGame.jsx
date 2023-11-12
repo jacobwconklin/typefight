@@ -30,7 +30,6 @@ const SimpleTypeGame = (props) => {
 
     // when an incorrect letter is typed LET THE USER KNOW!
     const typedWrongLetter = (letterTyped) => {
-        console.log(wrongLetter);
         setRandomFromTop((Math.random() * 500) + "px");
         setRandomFromLeft((Math.random() * 1500) + "px");
         setWrongLetter(letterTyped);
@@ -51,7 +50,6 @@ const SimpleTypeGame = (props) => {
                 headers: getStandardHeader(),
             })
             const data = await result.json();
-            console.log(data);
             setAvailableTexts(data);
         } catch (error) {
             console.log("Error retreiving all available texts", error);
@@ -72,7 +70,6 @@ const SimpleTypeGame = (props) => {
                 })
             })
             const data = await result.json();
-            console.log(data);
             setRemainingText(sanitizeString(data.entire_text));
             setSelectedTextId(data._id);
             setEntire_length(data.entire_text.length);
@@ -184,7 +181,6 @@ const SimpleTypeGame = (props) => {
                                         }
                                         // determine between space, correct letter, wrong letter, and backspace
                                         else if (key === remainingText[0] || (key === " " && (remainingText[0] === '\n' || remainingText[0] === '\t'))) {
-                                            console.log("Got the right letter")
                                             setWrongLetter("");
                                             // back-end only needs to get updated ont he index reached
                                             updatePlayerProgress(typedText.length);

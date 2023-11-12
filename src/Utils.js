@@ -35,7 +35,6 @@
         'Reggae One',
         'Roboto',
         'Roboto Serif',
-        'Tangerine',
         'Times New Roman',
         'Tomorrow'
     ]

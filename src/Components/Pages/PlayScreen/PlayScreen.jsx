@@ -50,7 +50,6 @@ const PlayScreen = (props) => {
                         })
                     });
                     const data = await result.json();
-                    // console.log(data);
                     // TODO determine if there is a need to validate data?
                     setSession(data);
                     // set background music audio based on game being played
@@ -68,8 +67,26 @@ const PlayScreen = (props) => {
         }, 1500); // TODO will need to tweak this it should run way more often than once per second but we will start slower
   
         //Clearing the interval
-        return () => clearInterval(interval);
+        return () => {
+            clearInterval(interval);
+        }
     }, [session, sessionId, playerId, backgroundMusic, setBackgroundMusic]);
+
+    // trying this to get it to run ONLY when playscreen dismounts
+    // DID not work, happens more often than just dismount
+    // useLayoutEffect(() => () => {
+    //     console.log("RUNNING USELAYOUTEFFECT IN PLAYSCREEN, SHOULD ONLY HAPPEN ON DISMOUNT");
+    //     // remove player from session           
+    //     // need to make sure it only happens on dismount
+    //     fetch(getServerBaseUrl() + "session/exit", {
+    //         method: "POST",
+    //         headers: getStandardHeader(),
+    //         body: JSON.stringify({
+    //             sessionId,
+    //             playerId
+    //         })
+    //     });
+    //   }, [sessionId, playerId])
 
     return (
         <div className='PlayScreen'>

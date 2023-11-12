@@ -42,7 +42,6 @@ const NewPlayer = (props) => {
             })
         })
         const data = await result.json();
-        console.log(data);
         setPlayerId(data.player._id);
         setSessionId(data.session._id);
         if (data.session.join_code) {

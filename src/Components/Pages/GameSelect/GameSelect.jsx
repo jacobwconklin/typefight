@@ -21,8 +21,7 @@ const GameSelect = (props) => {
 
     // tells session that a game has been selected (TODO May want to make only available to hosts)
     const selectGame = async (gameName) => {
-        console.log("Game selected: ", gameName);
-        const result = await fetch(getServerBaseUrl() + "session/select-game", {
+        await fetch(getServerBaseUrl() + "session/select-game", {
             method: "POST",
             headers: getStandardHeader(),
             body: JSON.stringify({
@@ -30,8 +29,6 @@ const GameSelect = (props) => {
                 selected_game: gameName
             })
         });
-        const data = await result.json();
-        console.log(data); // Don't believe I need this data for anything
     }
 
     // May just make game cards here individually rather than componetizing them if they are each going to be wildly different.

@@ -37,7 +37,6 @@ const SpacebarInvaders = (props) => {
                         })
                     });
                     const data = await result.json();
-                    // console.log(data);
                     setGameStatus(data);
                     // game is over if health is < 1
                 }
@@ -47,7 +46,10 @@ const SpacebarInvaders = (props) => {
         }, 1000); // TODO will need to tweak this 
   
         //Clearing the interval
-        return () => clearInterval(interval);
+        return () => {
+            // TODO wipe game here
+            clearInterval(interval);
+        }
     }, [gameStatus, sessionId]);
 
     return (

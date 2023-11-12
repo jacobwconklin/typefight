@@ -24,7 +24,6 @@ const SelectPrompt = (props) => {
             })
         });
         const data = await result.json();
-        console.log(data); 
         setPrompts(data);
     }
 
@@ -36,7 +35,6 @@ const SelectPrompt = (props) => {
                 headers: getStandardHeader(),
             });
             const data = await result.json();
-            console.log(data); 
             setPrompts(data);
         }
         getAllPrompts();
@@ -45,7 +43,7 @@ const SelectPrompt = (props) => {
     // Picks a prompt when clicked by someone
     const pickThisPrompt = async (prompt) => {
         // post prompt to server
-        const result = await fetch(getServerBaseUrl() + "quick-keys/prompt", {
+        await fetch(getServerBaseUrl() + "quick-keys/prompt", {
             method: "POST",
             headers: getStandardHeader(),
             body: JSON.stringify({
@@ -53,8 +51,6 @@ const SelectPrompt = (props) => {
                 sessionId
             })
         });
-        const data = await result.json();
-        console.log(data); 
     }
 
     // pick new game

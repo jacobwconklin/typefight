@@ -1,15 +1,15 @@
 // import material library if I settle on one
 
-.SpacebarInvadersGameplay {
-
-}
+// .SpacebarInvadersGameplay {
+    
+// }
 
 .OuterBounds {
     background-image: url('../../../../Assets/Games/SpacebarInvaders/space-stars-background.jpg');
     background-size: contain;
     background-repeat: repeat;
     min-width: 100%;
-    min-height: calc(100vh - 50px);
+    min-height: calc(100vh - 250px);
     height: fit-content;
     display: flex;
     align-items: center;
@@ -18,12 +18,65 @@
 
 
 // Maybe use media queries to have several set screen sizes? 
+// Standard size if screen fits 750 x 750:
 .GameElements {
     width: 750px;
     height: 750px;
     // background-color: rgba(255, 255, 255, 0.06);
     border-radius: 50%;
     overflow: hidden; // WILL INCLUDE THIS
+}
+
+@media only screen and (max-width: 800px), (max-height: 1000px) {
+    .GameElements {
+    width: 500px;
+    height: 500px;
+    }
+
+    .Planet {
+        max-width: 33px;
+        max-height: 33px;
+    }
+
+    .EnemyImage {
+        max-width: 33px;
+        max-height: 33px;
+    }
+
+    .Missile {
+        max-width: 33px;
+        max-height: 33px;
+    }
+
+    .Enemy {
+        transition: translate 1.2s;
+    }
+}
+
+@media only screen and (max-width: 550px), (max-height: 750px) {
+    .GameElements {
+        width: 250px;
+        height: 250px;
+    }
+
+    .Planet {
+        max-width: 20px;
+        max-height: 20px;
+    }
+
+    .EnemyImage {
+        max-width: 20px;
+        max-height: 20px;
+    }
+
+    .Missile {
+        max-width: 33px;
+        max-height: 33px;
+    }
+
+    .Enemy {
+        transition: translate 1.0s;
+    }
 }
 
 .Holder {
@@ -51,10 +104,11 @@
     .Enemy {
         grid-column: 1;
         grid-row: 1;
-        transition: translate 6s; // TODO this will depend on speed of status updates so asteroids move continually
+        transition: translate 1.5s; // TODO this will depend on speed of status updates so asteroids move continually
 
         .EnemyImage {
-            // transform: rotateZ(50deg);
+            width: 50px;
+            height: 50px;
         }
 
         .EnemyText {
@@ -69,20 +123,20 @@
     .Missile {
         grid-column: 1;
         grid-row: 1;
-        transition: translate 1s;
-
-        .MissileImage {
-            width: 50px;
-            height: 50px;
-        }
+        transition: translate 0.8s;
+        width: 50px;
+        height: 50px;
     }
 
 }
 
 .TypeHolder {
-    position: absolute;
-    top: 100px;
-    left: calc(50% - 150px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    height: 200px;
 
     .WaveAndHealth {
         display: flex;
@@ -95,10 +149,6 @@
 
     .TypeHere {
         width: 300px;
-        height: 50px;
-        .TypeInput {
-
-        }
     }
 }
 

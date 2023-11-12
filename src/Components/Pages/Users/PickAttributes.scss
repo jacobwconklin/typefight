@@ -20,7 +20,10 @@
 }
 
 .ProfileAndExample {
+    width: 75%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .ExamplePrompt {
@@ -96,9 +99,27 @@
 }
 
 .IconBox {
-    width: 75%;
-    min-width: 750px;
+    width: 1050px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+@media screen and (max-width: 1400px) {
+    .IconBox {
+        width: 750px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .IconBox {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .AliasColorAndFont {
+        width: 300;
+        justify-content: center;
+    }
 }

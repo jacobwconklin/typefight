@@ -30,7 +30,6 @@ const QuickKeys = (props) => {
                         })
                     });
                     const data = await result.json();
-                    console.log(data);
                     setGameStatus(data);
                     // determine if game is over (if all players have 'time' value)
                     let finishedCount = 0;
@@ -39,8 +38,6 @@ const QuickKeys = (props) => {
                             // count each player that has finished
                             if (result.time) finishedCount++;
                         })
-                        console.log("length: ", data.results.length);
-                        console.log("completed: ", finishedCount);
                         setGameCompleted(data.results.length === finishedCount);
                     }
                     if (data) {
@@ -55,7 +52,10 @@ const QuickKeys = (props) => {
         }, 1000); // TODO will need to tweak this it should run way more often than once per second but we will start slower
   
         //Clearing the interval
-        return () => clearInterval(interval);
+        return () => {
+            // TODO wipe game here
+            clearInterval(interval);
+        }
     }, [gameStatus, sessionId, playerId]);
 
     return (

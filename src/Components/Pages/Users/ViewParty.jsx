@@ -14,20 +14,16 @@ const ViewParty = (props) => {
     
     const {session, sessionId} = useContext(SessionContext);
 
-    console.log("session has the info: ", session);
-
     // TODO IF I make it so that players can't join a session that is started I should have a model warning the host before
     // they start it
     const beginSession = async () => {
-        const result = await fetch(getServerBaseUrl() + "session/begin", {
+        await fetch(getServerBaseUrl() + "session/begin", {
             method: "POST",
             headers: getStandardHeader(),
             body: JSON.stringify({
                 sessionId
             })
         });
-        const data = await result.json();
-        console.log(data);
         // set started to true, changes to front-end should appear once status is pulled again.
         // data is not really needed
     }
