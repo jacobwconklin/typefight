@@ -1,0 +1,29 @@
+
+.WordNotColor {
+    background-color: white;
+
+    h1 {
+        padding: 20px;
+    }
+
+    .colorWords {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    h3 {
+        padding: 20px;
+    }
+
+    .inputHolder {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .inputBox {
+        border: 2px solid black;
+        width: 200px;
+    }
+}

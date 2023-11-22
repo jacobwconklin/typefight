@@ -1,4 +1,5 @@
-import Gameplay from '../../Games/SpacebarInvaders/Gameplay';
+// import Gameplay from '../../Games/SpacebarInvaders/Gameplay';
+import Minigame from '../../Games/Minigames/Minigame';
 import './Playground.scss';
 
 // Playground
@@ -8,7 +9,7 @@ const Playground = (props) => {
 
     return (
         <div className='Playground'>
-            <Gameplay></Gameplay>
+            <Minigame />
         </div>
     )
 }
