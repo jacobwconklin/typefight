@@ -9,6 +9,10 @@ import finish from '../../../Assets/GameCards/QuickKeys/finish-race.svg';
 import asteroid from '../../../Assets/GameCards/SpacebarInvaders/asteroid.svg';
 import earth from '../../../Assets/GameCards/SpacebarInvaders/world-connection.svg';
 import ufo from '../../../Assets/GameCards/SpacebarInvaders/flying-saucer.svg';
+import airPump from '../../../Assets/GameCards/Textplosion/air-pump.svg';
+import basicBalloon from '../../../Assets/GameCards/Textplosion/basic-balloon.svg';
+import dynamite from '../../../Assets/GameCards/Textplosion/dynamite.svg';
+import handsUp from '../../../Assets/GameCards/Textplosion/hands-up.svg';
 import { useContext } from 'react';
 import { SessionContext } from '../PlayScreen/PlayScreen';
 import { getServerBaseUrl, getStandardHeader } from '../../../Utils';
@@ -17,7 +21,7 @@ import { getServerBaseUrl, getStandardHeader } from '../../../Utils';
 const GameSelect = (props) => {
 
     // comment out to visit game selecte from /games
-    const {sessionId} = useContext(SessionContext);
+    const {sessionId, session} = useContext(SessionContext);
 
     // tells session that a game has been selected (TODO May want to make only available to hosts)
     const selectGame = async (gameName) => {
@@ -60,6 +64,20 @@ const GameSelect = (props) => {
                         <img  className='CardIcon FlipIcon' style={{height:'60px', width:'60px', translate: '5px -20px'}} src={asteroid} alt='asteroid'/>
                         <img  className='CardIcon' style={{height:'130px', width:'130px', translate: '0px -30px'}} src={earth} alt='earth' />
                         <img  className='CardIcon' style={{translate: '5px -20px'}} src={ufo} alt='ufo'/>
+                    </div>
+                </div>
+                <div className={session?.players?.length > 1 ? 'GameCard' : 'GameCard DisabledCard'} onClick={() => {
+                    if (session?.players?.length > 1) {
+                        selectGame("Textplosion");
+                    }
+                }}>
+                    <h1>Textplosion</h1>
+                    <h3>{session?.players?.length > 1 ? 'Competetive' :  '2+ Players Required'}</h3>
+                    <div className='CardIcons'>
+                        <img  className='CardIcon' style={{height:'90px', width:'90px', translate: '8px 8px'}} src={basicBalloon} alt='balloon'/>
+                        <img  className='CardIcon' style={{height:'45px', width:'45px', translate: '-57px 18px'}} src={dynamite} alt='dynamite' />
+                        <img  className='CardIcon' style={{height:'60px', width:'60px', translate: '40px 20px'}} src={handsUp} alt='person'/>
+                        <img  className='CardIcon' style={{height:'40px', width:'40px', translate: '-40px 39px'}} src={airPump} alt='pump'/>
                     </div>
                 </div>
             </div>

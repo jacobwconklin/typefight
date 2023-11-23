@@ -37,7 +37,6 @@
     align-items: center;
     border: 6px solid rgb(0, 0, 0);
     background-image: linear-gradient(to left, rgb(188, 186, 186), rgb(134, 134, 134));
-    background-image: gradient;
 
     h1 {
         text-align: center;
@@ -62,6 +61,12 @@
             color: white;
         }
     }
+}
+
+.DisabledCard {
+    // TODO change this so the card LOOKs disabled
+    background-color: red;
+    background-image: radial-gradient(black, blue);
 }
 
 .CardIcons {

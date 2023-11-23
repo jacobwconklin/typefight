@@ -17,7 +17,8 @@ const App = () => {
   const nameToMusicMap = {
     home: homeTheme,
     quickKeys: quickKeysTheme,
-    spacebarInvaders: spacebarInvadersTheme
+    spacebarInvaders: spacebarInvadersTheme,
+    textplosion: spacebarInvadersTheme // TODO get an audio theme for textplosion add bings for your pumps and boom for balloon pop
   }
 
   // react-audio-player provides background music with the selected theme stored in state here

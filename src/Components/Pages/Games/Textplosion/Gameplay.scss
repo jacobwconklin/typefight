@@ -1,0 +1,37 @@
+
+.Gameplay {
+    
+    padding: 50px;
+
+    .balloonAndPlayers {
+        display: flex;
+        flex-wrap: wrap;
+
+        .balloon {
+            width: 100px;
+            height: 100px;
+            border-radius: 5% 10% 15% 20%;
+            background-color: red;
+        }
+
+        .hotSeat {
+            background-color: aqua;
+            width: 100px;
+            height: 100px;
+        }
+
+        .pumper {
+            background-color: green;
+            width: 100px;
+            height: 100px;
+        }
+
+        .dead {
+            border: 2px solid gold;
+        }
+    }
+
+    .balloonAndPlayers > * {
+        margin: 20px;
+    }
+}

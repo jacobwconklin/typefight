@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import QuickKeys from '../Games/QuickKeys/QuickKeys';
 import SpacebarInvaders from '../Games/SpacebarInvaders/SpacebarInvaders';
 import { BackgroundAudioContext } from '../../../App';
+import Textplosion from '../Games/Textplosion/Textplosion';
 
 // PlayScreen. Once user clicks "host", "join", or "solo", play screen uses conditional 
 // rendering to control the user's screen rather than traditional router navigation. Manually
@@ -59,6 +60,8 @@ const PlayScreen = (props) => {
                         setBackgroundMusic("quickKeys");
                     } else if (data?.selected_game === "Spacebar Invaders" && backgroundMusic !== "spacebarInvaders") {
                         setBackgroundMusic("spacebarInvaders");
+                    } else if (data?.selected_game === "Textplosion" && backgroundMusic !== "textplosion") {
+                        setBackgroundMusic("textplosion");
                     }
                 }
             } catch (error) {
@@ -88,6 +91,19 @@ const PlayScreen = (props) => {
     //     });
     //   }, [sessionId, playerId])
 
+    // get jsx for selected game
+    const getSelectedGame = () => {
+        if (session.selected_game === "Quick Keys") {
+            return <QuickKeys />
+        } else if (session.selected_game === "Spacebar Invaders") {
+            return <SpacebarInvaders />
+        } else if (session.selected_game === "Textplosion") {
+            return <Textplosion />
+        } else {
+            return <p>Game Not Supported</p>
+        }
+    }
+
     return (
         <div className='PlayScreen'>
             <SessionContext.Provider
@@ -96,17 +112,7 @@ const PlayScreen = (props) => {
                 {
                     session.selected_game ? 
                     // display selected game by mapping "selected_game" to JSX component
-                    (
-                        session.selected_game === "Quick Keys" ? 
-                        <QuickKeys />
-                        :
-                        (
-                            session.selected_game === "Spacebar Invaders" ? 
-                            <SpacebarInvaders />
-                            :
-                            <p>game not supported</p>
-                        )
-                    )
+                    getSelectedGame()
                     :
                     // else determine if player already created
                     (
