@@ -72,7 +72,7 @@ const GameSelect = (props) => {
                     }
                 }}>
                     <h1>Textplosion</h1>
-                    <h3>{session?.players?.length > 1 ? 'Competetive' :  '2+ Players Required'}</h3>
+                    <h3>{session?.players?.length > 1 ? 'Competitive' :  '2+ Players Required'}</h3>
                     <div className='CardIcons'>
                         <img  className='CardIcon' style={{height:'90px', width:'90px', translate: '8px 8px'}} src={basicBalloon} alt='balloon'/>
                         <img  className='CardIcon' style={{height:'45px', width:'45px', translate: '-57px 18px'}} src={dynamite} alt='dynamite' />

@@ -5,7 +5,8 @@
 // so maybe have two arrays: played and not played games and when played gets empty put all of the
 // played games back and shuffle them. 
 import './Minigame.scss';
-import WordNotColor from './WordNotColor';
+import ClickBugsInOrder from './TheMiniGames/ClickBugsInOrder';
+import WordNotColor from './TheMiniGames/WordNotColor';
 
 // Minigame
 const Minigame = (props) => {
@@ -16,12 +17,24 @@ const Minigame = (props) => {
         // TODO if succeeded DONE with minigame (unless multiple are required) 
         // if failed may need to repeat that or just report it to the parent, should have
         // setting for if minigame is played UNTIL success or not
-        console.log(succeeded);
+        console.log("Minigame completed succesfully?: ", succeeded);
+        // IF the parent wants the result pass it up
+        if (props.completeMinigame) {
+            props.completeMinigame(succeeded);
+        }
+
+        // this will cause additional minigames to be played until one is successful if chosen by the parent
+        // TODO will be more relevant with timed minigames
+        if (!succeeded && props.loopUntilSuccess) {
+            // TODO will need a useEffect to set the selected minigame into state so that it can be changed here
+            // and updated reactively. 
+        }
     }
 
 
     const allMinigames = [
-        <WordNotColor completeMinigame={completeMinigame} />
+        <WordNotColor completeMinigame={completeMinigame} />,
+        <ClickBugsInOrder completeMinigame={completeMinigame} />
     ]
 
     // grab random minigame from list
@@ -30,7 +43,7 @@ const Minigame = (props) => {
     }
 
     return (
-        <div className='Minigame'>
+        <div className='Minigame full-size'>
             {
                 getOneMinigame()
             }

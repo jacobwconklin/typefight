@@ -14,6 +14,7 @@ const WordNotColor = (props) => {
     const [selectedWords, setSelectedWords] = useState([]);
     const [typedWords, setTypedWords] = useState([]);
     const [typedWord, setTypedWord] = useState("");
+    const [wordAppearanceColors, setWordAppearanceColors] = useState([]);
 
     useEffect(() => {
         const colorWords = [
@@ -30,10 +31,17 @@ const WordNotColor = (props) => {
             "ivory", "champagne", "mauve", "burgundy"
         ];
 
-        setSelectedWords(colorWords.sort(() => Math.random() - 0.5).slice(0, 5));
+        const numberOfWords = 5;
+        setSelectedWords(colorWords.sort(() => Math.random() - 0.5).slice(0, numberOfWords));
+        const appearanceColors = [];
+        for (let i = 0; i < numberOfWords; i++) {
+            appearanceColors.push(`rgb(${Math.random() * 200}, ${Math.random() * 200}, ${Math.random() * 200})`);
+        }
+        setWordAppearanceColors(appearanceColors);
+
         // should set colors here so that they don't keep changing
 
-    }, [setSelectedWords]);
+    }, [setSelectedWords, setWordAppearanceColors]);
 
     return (
         <div className='WordNotColor'>
@@ -43,9 +51,9 @@ const WordNotColor = (props) => {
                     // shuffle array of word colors and "grab" a few with splice 
                     // todo set background to be dark if color is to light or only select "dark" 
                     // enough colors. 
-                    selectedWords.filter(word => !typedWords.includes(word)).map(colorWord => (
+                    selectedWords.filter(word => !typedWords.includes(word)).map( (colorWord, index) => (
                         <h3 key={colorWord} 
-                            style={{ color: `rgb(${Math.random() * 200}, ${Math.random() * 200}, ${Math.random() * 200})` }} >
+                            style={{ color: wordAppearanceColors[index] }} >
                             {colorWord}
                         </h3>
                     ))
@@ -57,15 +65,19 @@ const WordNotColor = (props) => {
                     placeholder='Type Here'
                     value={typedWord}
                     onChange={e => {
-                        if ( !typedWords.includes(e.target.value.toLowerCase().trim()) && 
-                            selectedWords.includes(e.target.value.toLowerCase().trim())) {
+                        const cleanedTypedWord = e.target.value.toLowerCase().trim();
+                        if ( !typedWords.includes(cleanedTypedWord) && 
+                            selectedWords.includes(cleanedTypedWord)) {
                             // put it into typed words and reset typed word to blank
                             const typedWordsCopy = typedWords;
-                            typedWordsCopy.push(e.target.value.toLowerCase().trim());
+                            typedWordsCopy.push(cleanedTypedWord);
                             if (typedWordsCopy.length === selectedWords.length) {
                                 props.completeMinigame(true);
                             }
                             setTypedWords(typedWordsCopy);
+                            const appearanceColorsCopy = wordAppearanceColors;
+                            appearanceColorsCopy.splice( selectedWords.indexOf(cleanedTypedWord), 1);
+                            setWordAppearanceColors(appearanceColorsCopy);
                             
                             setTypedWord("");
                         } else {

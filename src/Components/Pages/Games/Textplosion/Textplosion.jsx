@@ -1,11 +1,13 @@
 
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import './Textplosion.scss';
 import { useContext, useEffect, useState } from 'react';
 import Minigame from '../Minigames/Minigame';
 import Gameplay from './Gameplay';
 import { SessionContext } from '../../PlayScreen/PlayScreen';
 import { getServerBaseUrl, getStandardHeader } from '../../../../Utils';
+import { generate } from "random-words";
+// const { generate } = await import("random-words");
 
 // Textplosion
 const Textplosion = (props) => {
@@ -13,10 +15,13 @@ const Textplosion = (props) => {
     // logic to open modal based on if this player is in the hot seat 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [gameOver, setGameOver] = useState(false);
+    const [isInHotSeat, setIsInHotSeat] = useState(false);
+    const [wordToPump, setWordToPump] = useState(generate()); // start with random word
+    const [typedPumpWord, setTypedPumpWord] = useState("");
 
     // hold game status and retreive session id
     const [gameStatus, setGameStatus] = useState({});
-    const { sessionId } = useContext(SessionContext);
+    const { sessionId, playerId } = useContext(SessionContext);
 
     // useEffect to status Textplosion game and pass list of players (including their positions)
     // down to gameplay
@@ -34,11 +39,18 @@ const Textplosion = (props) => {
                         })
                     });
                     const data = await result.json();
-                    setGameStatus(data.players);
+                    console.log(data);
+                    setGameStatus(data);
                     // check for only one living player left to set gameOver
                     if (data.players.filter(player => !player.blownUp).length <= 1) {
                         // end of game reached one player left not blown up
                         setGameOver(true);
+                    }
+                    // check for current player identifiable via (and remember it is stored as field playerId not _id)
+                    // to see if the current player is in the hot seat (if not blownUp and at position 0)
+                    const matchingPlayer = data.players.find(player => player.playerId === playerId);
+                    if (matchingPlayer) {
+                        setIsInHotSeat(!matchingPlayer.blownUp && matchingPlayer.position === 0);
                     }
                 }
             } catch (error) {
@@ -51,7 +63,21 @@ const Textplosion = (props) => {
             // TODO wipe game here
             clearInterval(interval);
         }
-    }, [sessionId]);
+    }, [sessionId, playerId]);
+
+    // Create function to handle return value from minigame, when 'true' is returned because the player successfully completed the minigame
+    // allow the player to escape
+    const completeMinigame = async (succeeded) => {
+        if (succeeded) {
+            await fetch(getServerBaseUrl() + "textplosion/escape", {
+                method: "POST",
+                headers: getStandardHeader(),
+                body: JSON.stringify({
+                    sessionId
+                })
+            });
+        }
+    }
 
     return (
         <div className='Textplosion full-screen'>
@@ -63,7 +89,45 @@ const Textplosion = (props) => {
                 :
                 <div className='ActiveGame full-screen'>
                     <Gameplay status={gameStatus} />
-                    <Button 
+                    {
+                        // IF current player is NOT in hotseat give them a box with random words and 
+                        // an input box to pump, otherwise give them a screen to play minigames
+                        // TODO would prefer for the minigame to pop up as a modal rather than drop down on the 
+                        // screen but haven't gotten to that yet
+                        isInHotSeat ?
+                        <div>
+                            <h1>In the hot seat! perform minigame to escape</h1>
+                            <Minigame completeMinigame={completeMinigame} />
+                        </div>
+                        :
+                        <div>
+                            <h1>Not in hot seat, type the words to pump the balloon:</h1>
+                            <h3>{wordToPump}</h3>
+                            <Input
+                                className='pumpInput'
+                                placeholder='Type Here'
+                                value={typedPumpWord}
+                                onChange={e => {
+                                    if ( e.target.value === wordToPump ) {
+                                        // perform fetch to let backend know to pump
+                                        fetch(getServerBaseUrl() + "textplosion/pump", {
+                                            method: "POST",
+                                            headers: getStandardHeader(),
+                                            body: JSON.stringify({
+                                                sessionId,
+                                                word: wordToPump
+                                            })
+                                        });
+                                        setTypedPumpWord("");
+                                        setWordToPump(generate());
+                                    } else {
+                                        setTypedPumpWord(e.target.value);
+                                    }
+                                }}
+                            />
+                        </div>
+                    }
+                    {/* <Button 
                         onClick={() => {
                             // open modal, will make my own rather than antD
                             setModalIsOpen(currValue => !currValue);
@@ -78,7 +142,7 @@ const Textplosion = (props) => {
                         <div className='MinigameHolder'>
                             <Minigame />
                         </div>
-                    }
+                    } */}
                 </div>
             }
         </div>

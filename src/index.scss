@@ -47,6 +47,14 @@ h1 {
   height: fit-content;
 }
 
+.absolute-full {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
 .IconImage {
   width: 40px;
   height: 40px;

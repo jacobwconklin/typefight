@@ -1,6 +1,7 @@
 // import Gameplay from '../../Games/SpacebarInvaders/Gameplay';
 // import Minigame from '../../Games/Minigames/Minigame';
 // import Textplosion from '../../Games/Textplosion/Textplosion';
+import Minigame from '../../Games/Minigames/Minigame';
 import './Playground.scss';
 
 // Playground
@@ -10,7 +11,9 @@ const Playground = (props) => {
 
     return (
         <div className='Playground'>
-            < p>Currently Empty</p>
+            <div className='MinigameBox'>
+                <Minigame />
+            </div>
         </div>
     )
 }

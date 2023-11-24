@@ -20,6 +20,9 @@
         .NavBarButton {
             padding: 10px;
 
+            &:hover {
+                cursor: pointer;
+            }
         }
 
         .NavBarButton > * {

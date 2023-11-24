@@ -190,8 +190,14 @@ const Gameplay = (props) => {
             Math.atan(y / (x === 0 ? x : x + 0.01)) + 
             (x > 0 ? 0.7 : Math.PI + 0.7) : -0.77}rad)`;
         setTimeout(() => {
-            // move missile
-            spawnImage.style.translate = `${x}px ${y}px`
+            // move missile based on screen size 
+            if (screen.width > 800 && screen.height > 1000) {
+                spawnImage.style.translate = `${x}px ${y}px`
+            } else if (screen.width > 550 && screen.height > 750) {
+                spawnImage.style.translate = `${~~(x * 0.67)}px ${~~(y * 0.67)}px`
+            } else {
+                spawnImage.style.translate = `${~~(x * 0.33)}px ${~(y * 0.33)}px`
+            }
             setTimeout(() => {
                 // change missile to explosion
                 spawnImage.src = explosion;
