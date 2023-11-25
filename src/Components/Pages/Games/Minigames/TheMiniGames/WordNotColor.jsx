@@ -31,7 +31,7 @@ const WordNotColor = (props) => {
             "ivory", "champagne", "mauve", "burgundy"
         ];
 
-        const numberOfWords = 5;
+        const numberOfWords = 10;
         setSelectedWords(colorWords.sort(() => Math.random() - 0.5).slice(0, numberOfWords));
         const appearanceColors = [];
         for (let i = 0; i < numberOfWords; i++) {

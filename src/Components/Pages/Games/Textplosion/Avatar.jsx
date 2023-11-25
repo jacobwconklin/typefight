@@ -13,13 +13,17 @@ const Avatar = (props) => {
     // TODO ideally would create pixel art gifs for this of characters pumping
 
     return (
-        <div className='Avatar'>
+        <div className='Avatar' style={{border: (props.player.blownUp ? '2px solid black' : (props.player.position === 0 ? '1px solid red' : 'none')), 
+            backgroundColor: props.player.blownUp ? 'black' : 'white',
+        }}>
+            <p className='PlayerName' style={{fontFamily: ('\'' + props.player.font + '\''), 
+                color: props.player.blownUp ? 'white' : 'black',
+            }} >
+            {props.player.alias} 
+            </p>
             <Button className='IconButton' style={{backgroundColor: props.player.color}}>
                 <img src={allIcons.find(icon => icon.title === props.player.icon).src} alt={props.player.icon} className='IconImage' />
             </Button>
-            <p className='PlayerName' style={{fontFamily: ('\'' + props.player.font + '\'')}} >
-               {props.player.alias} 
-            </p>
         </div>
     )
 }

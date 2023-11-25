@@ -1,0 +1,10 @@
+
+
+.TextplosionGameOver {
+    position: absolute;
+    top: 50px;
+    min-width: 100vw;
+    min-height: calc(100vh - 50px);
+    text-align: center;
+    background-image: linear-gradient(green, lightblue, blue);
+}

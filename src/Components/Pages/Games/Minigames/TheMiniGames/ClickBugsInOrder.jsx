@@ -30,6 +30,14 @@ const ClickBugsInOrder = (props) => {
     // display none rather than removing them from the array... 
     return (
         <div className='ClickBugsInOrder absolute-full'>
+            {
+                bugs.length === 0 ?
+                <div className='completedMessage'>
+                    <h1>Nice Job</h1>
+                </div>
+                :
+                <p style={{textAlign: 'center', marginTop: '50px'}}>Click on the bugs in order!</p>
+            }
             <div className='BugHolder Beetle' id='beetle-bug-holder'
                 onClick={() => {
                     // check if at front of array ONLY THEN can it be removed
@@ -42,34 +50,38 @@ const ClickBugsInOrder = (props) => {
                 <img className='BugImage' src={beetle} alt='beetle'  />
                 <h3>One</h3>
             </div>
-            <div className='BugHolder Bee'
+            <div className='BugHolder Bee' id='bee-bug-holder'
                 onClick={() => {
                     // check if at front of array ONLY THEN can it be removed
                     if (bugs[0].bug === "bee") {
                         setBugs(bugs.slice(1));
+                        document.getElementById('bee-bug-holder').style.display = 'none';
                     }
                 }}
             >
                 <img className='BugImage' src={bee} alt='bee'  />
                 <h3>Two</h3>
             </div>
-            <div className='BugHolder Worm'
+            <div className='BugHolder Worm' id='worm-bug-holder'
                 onClick={() => {
                     // check if at front of array ONLY THEN can it be removed
                     if (bugs[0].bug === "worm") {
                         setBugs(bugs.slice(1));
+                        document.getElementById('worm-bug-holder').style.display = 'none';
                     }
                 }}
             >
                 <img className='BugImage' src={worm} alt='worm'  />
                 <h3>Three</h3>
             </div>
-            <div className='BugHolder LadyBug'
+            <div className='BugHolder LadyBug' id='ladybug-bug-holder'
                 onClick={() => {
                     // check if at front of array ONLY THEN can it be removed
                     if (bugs[0].bug === "ladyBug") {
                         // game is completed successfully report it up
                         props.completeMinigame(true);
+                        setBugs([]);
+                        document.getElementById('ladybug-bug-holder').style.display = 'none';
                     }
                 }}
             >

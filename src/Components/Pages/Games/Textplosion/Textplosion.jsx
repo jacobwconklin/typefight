@@ -1,5 +1,5 @@
 
-import { Button, Input } from 'antd';
+import { Input } from 'antd';
 import './Textplosion.scss';
 import { useContext, useEffect, useState } from 'react';
 import Minigame from '../Minigames/Minigame';
@@ -7,13 +7,14 @@ import Gameplay from './Gameplay';
 import { SessionContext } from '../../PlayScreen/PlayScreen';
 import { getServerBaseUrl, getStandardHeader } from '../../../../Utils';
 import { generate } from "random-words";
+import GameOver from './GameOver';
 // const { generate } = await import("random-words");
 
 // Textplosion
 const Textplosion = (props) => {
 
     // logic to open modal based on if this player is in the hot seat 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    // const [modalIsOpen, setModalIsOpen] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [isInHotSeat, setIsInHotSeat] = useState(false);
     const [wordToPump, setWordToPump] = useState(generate()); // start with random word
@@ -39,7 +40,7 @@ const Textplosion = (props) => {
                         })
                     });
                     const data = await result.json();
-                    console.log(data);
+                    console.log("Textplosion Status: ", data);
                     setGameStatus(data);
                     // check for only one living player left to set gameOver
                     if (data.players.filter(player => !player.blownUp).length <= 1) {
@@ -50,20 +51,23 @@ const Textplosion = (props) => {
                     // to see if the current player is in the hot seat (if not blownUp and at position 0)
                     const matchingPlayer = data.players.find(player => player.playerId === playerId);
                     if (matchingPlayer) {
-                        setIsInHotSeat(!matchingPlayer.blownUp && matchingPlayer.position === 0);
+                        // only set it if it changes
+                        if (isInHotSeat !== (!matchingPlayer.blownUp && matchingPlayer.position === 0)) {
+                            setIsInHotSeat(!matchingPlayer.blownUp && matchingPlayer.position === 0);
+                        }
                     }
                 }
             } catch (error) {
                 console.log("Error fetching textplosion game status", error);
             }
-        }, 500); // TODO adjust for wanted latency hitting backend for status
+        }, 1000); // TODO adjust for wanted latency hitting backend for status
   
         //Clearing the interval
         return () => {
             // TODO wipe game here
             clearInterval(interval);
         }
-    }, [sessionId, playerId]);
+    }, [sessionId, playerId, isInHotSeat]);
 
     // Create function to handle return value from minigame, when 'true' is returned because the player successfully completed the minigame
     // allow the player to escape
@@ -76,6 +80,7 @@ const Textplosion = (props) => {
                     sessionId
                 })
             });
+            console.log("attempted escape");
         }
     }
 
@@ -85,7 +90,7 @@ const Textplosion = (props) => {
                 // if game is still going (IE more than one person not blown up show the game screen, )
                 // OTHERWISE show the game over screen
                 gameOver ? 
-                <div className='GAMEOVER TODO SHOULD BE SEPARATE COMPONENT'></div>
+                <GameOver status={gameStatus} />
                 :
                 <div className='ActiveGame full-screen'>
                     <Gameplay status={gameStatus} />
@@ -95,14 +100,17 @@ const Textplosion = (props) => {
                         // TODO would prefer for the minigame to pop up as a modal rather than drop down on the 
                         // screen but haven't gotten to that yet
                         isInHotSeat ?
-                        <div>
-                            <h1>In the hot seat! perform minigame to escape</h1>
-                            <Minigame completeMinigame={completeMinigame} />
+                        <div className='HotSeatScreen'>
+                            <h1>You're in the hot seat! complete a minigame to escape</h1>
+                            <div className='MinigameHolder'>
+                                <Minigame completeMinigame={completeMinigame} />
+                            </div>
+                            <div></div>
                         </div>
                         :
-                        <div>
-                            <h1>Not in hot seat, type the words to pump the balloon:</h1>
-                            <h3>{wordToPump}</h3>
+                        <div className='PumpScreen'>
+                            <h1>type the words below to pump the balloon:</h1>
+                            <h2>{wordToPump}</h2>
                             <Input
                                 className='pumpInput'
                                 placeholder='Type Here'
@@ -118,6 +126,7 @@ const Textplosion = (props) => {
                                                 word: wordToPump
                                             })
                                         });
+                                        console.log("attempted pump");
                                         setTypedPumpWord("");
                                         setWordToPump(generate());
                                     } else {

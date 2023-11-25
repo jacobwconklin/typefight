@@ -14,7 +14,10 @@ const Gameplay = (props) => {
         <div className='Gameplay'>
             <div className='balloonAndPlayers'>
                 <div>
-                    <div className='balloon'></div>
+                    <div className='balloon' style={{
+                        width: `${100 + (props?.status?.game?.charsTyped ? (150 * (props?.status?.game?.charsTyped / props?.status?.game?.charsToPop)) : 0)}px`,
+                        height: `${100 + (props?.status?.game?.charsTyped ? (150 * (props?.status?.game?.charsTyped / props?.status?.game?.charsToPop)) : 0)}px`,
+                    }}></div>
                 </div>
                 {
                     // map all alive players in order of their position
