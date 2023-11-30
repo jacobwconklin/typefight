@@ -1,0 +1,10 @@
+Can delete this file just wanted to write down my idea.
+
+I want a game where players simply type a word to move either up, left, right, or down. They can have 
+an input box with a randomly generated word in each direction so that typing the word moves them in that
+corresponding direction. Players are on a 2D plane of some sort (maybe a grid but doesn't have to be) and 
+obstacles are coming at them. The players simply type to move to survive. This game could be cooperative where 
+players can type a long phrase to get revived, or competitve where the last player standing wins and players 
+who are defeated type attacks. In fact I would like to have both versions eventually. Should serve as a 
+rudimentary pre-cursor to type fight to help me get the hang of moving players around the screen, but since they 
+wont interract with one-another the order they move in is irrelevant. 

@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import './Home.scss';
-import KeyboardVisualizer from '../../Reusable/KeyboardVisualizer';
 // import { useContext, useEffect } from 'react';
 // import { BackgroundAudioContext } from '../../../App';
 
@@ -72,9 +71,6 @@ const Home = (props) => {
             </div>
             <div className='FunAnimations' id='funimation'>
 
-            </div>
-            <div className='HomeKeyboard'>
-                    <KeyboardVisualizer />
             </div>
         </div>
     )

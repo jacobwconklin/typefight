@@ -139,7 +139,7 @@ const Gameplay = (props) => {
                         </div>
                     </div>
                     {
-                        props.progress && props.progress.sort((a, b) => a.index < b.index).map(result => (
+                        props.progress && props.progress.sort((a, b) => a.index - b.index).map(result => (
                             <div className='PlayerProgressIcon'
                                 style={{ 
                                     translate: `${Math.floor((result.index / entire_length) * 500) - 33}px -165px`,

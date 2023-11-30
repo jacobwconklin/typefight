@@ -8,6 +8,7 @@ import homeTheme from './Assets/Sounds/Themes/battle-station.mp3';
 import quickKeysTheme from './Assets/Sounds/Themes/JazzyBg.mp3';
 import spacebarInvadersTheme from './Assets/Sounds/Themes/insurrection.mp3';
 import ReactAudioPlayer from 'react-audio-player';
+import KeyboardVisualizer from './Components/Reusable/KeyboardVisualizer';
 
 // Moving BrowserRouter up allows useNavigate to be used in the header
 
@@ -26,6 +27,9 @@ const App = () => {
   const [backgroundMusic, setBackgroundMusic] = useState("");
   const [musicMuted, setMusicMuted] = useState(true);
 
+  // allow user to place and retract the on-screen keyboard
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
   return (
     <div className="App">
       <ReactAudioPlayer className='AudioPlayer'
@@ -38,13 +42,18 @@ const App = () => {
         <BackgroundAudioContext.Provider
           value={{setBackgroundMusic, backgroundMusic, setMusicMuted, musicMuted}}
         >
-          <NavHeader />
+          <NavHeader keyboardVisible={keyboardVisible} setKeyboardVisible={setKeyboardVisible} />
           <div className='BelowHeader'>
             <div className='SideAndRouter full-size'>
               <SideBar />
                 <Router />
               </div>
           </div>
+          {
+            <div className='KeyboardHolder' style={{display: keyboardVisible ? 'flex' : 'none'}}>
+              <KeyboardVisualizer />
+            </div>
+          }
         </BackgroundAudioContext.Provider>
       </BrowserRouter>
     </div>

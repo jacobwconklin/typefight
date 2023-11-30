@@ -3,6 +3,7 @@ import './NavHeader.scss';
 import chat from '../../Assets/Site/chat.svg';
 import volumeOn from '../../Assets/Site/volume-on.svg';
 import volumeMute from '../../Assets/Site/volume-mute.svg';
+import keyboard from '../../Assets/Site/keyboard.svg';
 import { useContext } from 'react';
 import { BackgroundAudioContext } from '../../App';
 
@@ -31,6 +32,13 @@ const NavHeader = (props) => {
                         :
                         <img src={volumeOn} alt='Volume On' />
                     }
+                </div>
+                <div className='NavBarButton'
+                    onClick={() => {
+                        props.setKeyboardVisible(keyboardVisible => !keyboardVisible);
+                    }}
+                >
+                    <img src={keyboard} alt='keyboard' />
                 </div>
             </div>
             {/* Maybe put all player icons in the header... would need to push a context out of player icons or something */}

@@ -20,4 +20,17 @@
       display: flex;
     }
   }
+
+  .KeyboardHolder {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    top: 50px;
+    height: calc(100vh - 50px);
+    width: 100vw;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 5;
+  }
 }
