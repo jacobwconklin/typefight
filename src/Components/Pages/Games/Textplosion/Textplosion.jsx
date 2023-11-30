@@ -110,30 +110,33 @@ const Textplosion = (props) => {
                         :
                         <div className='PumpScreen'>
                             <h1>type the words below to pump the balloon:</h1>
-                            <h2>{wordToPump}</h2>
-                            <Input
-                                className='pumpInput'
-                                placeholder='Type Here'
-                                value={typedPumpWord}
-                                onChange={e => {
-                                    if ( e.target.value === wordToPump ) {
-                                        // perform fetch to let backend know to pump
-                                        fetch(getServerBaseUrl() + "textplosion/pump", {
-                                            method: "POST",
-                                            headers: getStandardHeader(),
-                                            body: JSON.stringify({
-                                                sessionId,
-                                                word: wordToPump
-                                            })
-                                        });
-                                        console.log("attempted pump");
-                                        setTypedPumpWord("");
-                                        setWordToPump(generate());
-                                    } else {
-                                        setTypedPumpWord(e.target.value);
-                                    }
-                                }}
-                            />
+                            <div className='PumpInputBox'>
+                                <h2>{wordToPump}</h2>
+                                <Input
+                                    className='PumpInput'
+                                    placeholder='Type Here'
+                                    value={typedPumpWord}
+                                    onChange={e => {
+                                        if ( e.target.value === wordToPump ) {
+                                            // perform fetch to let backend know to pump
+                                            fetch(getServerBaseUrl() + "textplosion/pump", {
+                                                method: "POST",
+                                                headers: getStandardHeader(),
+                                                body: JSON.stringify({
+                                                    sessionId,
+                                                    word: wordToPump
+                                                })
+                                            });
+                                            console.log("attempted pump");
+                                            setTypedPumpWord("");
+                                            setWordToPump(generate());
+                                        } else {
+                                            setTypedPumpWord(e.target.value);
+                                        }
+                                    }}
+                                />
+                            </div>
+                            <div></div>
                         </div>
                     }
                     {/* <Button 

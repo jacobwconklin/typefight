@@ -38,16 +38,63 @@ const KeyboardVisualizer = (props) => {
     const [showSettings, setShowSettings] = useState(true);
     const [opacity, setOpacity] = useState(75);
     const [size, setSize] = useState(screen.width / 2.5);
-    const [upTranslate, setUpTranlate] = useState(0);
-    const [rightTranslate, setRightTranslate] = useState(0);
+    // const [upTranslate, setUpTranlate] = useState(0);
+    // const [rightTranslate, setRightTranslate] = useState(0);
     
     const formatter = (value) => `${value}%`;   
 
+
+    // handle dragging keyboard from: https://www.w3schools.com/howto/howto_js_draggable.asp
+    const dragElement = (elmnt) => {
+        console.log(elmnt);
+        if (elmnt) {
+            var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            if (document.getElementById("drag-box")) {
+                // if present, the header is where you move the DIV from:
+                document.getElementById("drag-box").onmousedown = dragMouseDown;
+            } else {
+                // otherwise, move the DIV from anywhere inside the DIV: 
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+        }
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            // stop moving when mouse button is released:
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    }
+
+    dragElement(document.getElementById("keyboard-visualizer"));
+
     return (
-        <div className='KeyboardVisualizer'
-            style={{opacity: (opacity + "%"), width: size + 'px', fontSize: `${size * 0.0178}px`,
-                translate: `${rightTranslate}px ${upTranslate}px`
-            }}
+        <div className='KeyboardVisualizer' id='keyboard-visualizer'
+            style={{opacity: (opacity + "%"), width: size + 'px', fontSize: `${size * 0.0178}px`, }}
         >
             <div className='Settings'>
                 {
@@ -92,7 +139,7 @@ const KeyboardVisualizer = (props) => {
                         <div className='PositionSetting'>
                             <h4  style={{marginBottom: '5px'}} >Position</h4>               
                             <div className='SizeButtons'>
-                                <Button
+                                {/* <Button
                                     onClick={() => {
                                         setRightTranslate(currTranslate => currTranslate - 25);
                                     }}
@@ -115,7 +162,10 @@ const KeyboardVisualizer = (props) => {
                                         setRightTranslate(currTranslate => currTranslate + 25);
                                     }}
                                     disabled = {rightTranslate > 1000}
-                                >&rarr;</Button>
+                                >&rarr;</Button> */}
+                                <div className='DragBox' id='drag-box'>
+                                    Click Here To Drag
+                                </div>
                             </div>
                         </div>
                     </div>

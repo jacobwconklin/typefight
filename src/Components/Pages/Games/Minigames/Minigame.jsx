@@ -9,6 +9,8 @@ import './Minigame.scss';
 import ClickBugsInOrder from './TheMiniGames/ClickBugsInOrder';
 import WordNotColor from './TheMiniGames/WordNotColor';
 
+// TODO design all mini-games to fit in a 400 x 400 box
+
 // Minigame
 const Minigame = (props) => {
 

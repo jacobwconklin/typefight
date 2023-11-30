@@ -45,14 +45,14 @@ const WordNotColor = (props) => {
 
     return (
         <div className='WordNotColor'>
-            <h1>Type the following words as they are spelled not by their coloring:</h1>
+            <h1>Type by Spelling NOT Color:</h1>
             <div className='colorWords'>
                 {
                     // shuffle array of word colors and "grab" a few with splice 
                     // todo set background to be dark if color is to light or only select "dark" 
                     // enough colors. 
-                    selectedWords.filter(word => !typedWords.includes(word)).map( (colorWord, index) => (
-                        <h3 key={colorWord} 
+                    selectedWords.map( (colorWord, index) => (
+                        <h3 key={colorWord} id={colorWord + '-color'}
                             style={{ color: wordAppearanceColors[index] }} >
                             {colorWord}
                         </h3>
@@ -75,10 +75,13 @@ const WordNotColor = (props) => {
                                 props.completeMinigame(true);
                             }
                             setTypedWords(typedWordsCopy);
-                            const appearanceColorsCopy = wordAppearanceColors;
-                            appearanceColorsCopy.splice( selectedWords.indexOf(cleanedTypedWord), 1);
-                            setWordAppearanceColors(appearanceColorsCopy);
-                            
+                            // rather than filtering out already typed words and changing the appearance colors array, 
+                            // find the words by id and set display to none
+                            try {
+                                document.getElementById(cleanedTypedWord + "-color").style.display = 'none';
+                            } catch (error) {
+                                console.log("Error making color word display none", error);
+                            }
                             setTypedWord("");
                         } else {
                             setTypedWord(e.target.value);

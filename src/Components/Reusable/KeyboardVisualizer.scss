@@ -1,5 +1,6 @@
 
 .KeyboardVisualizer {
+    position: absolute;
     background-color: grey;
     padding: 20px;
     // width: 900px;
@@ -61,12 +62,18 @@
             .PositionSetting {
                 width: 25%;
 
-                .SizeButtons {
+                .DragBox {
                     display: flex;
-                    flex-wrap: wrap;
+                    align-items: center;
+                    border: 2px solid black;
+                    width: fit-content;
+                    padding: 10px 5px 10px 5px;
 
-                    Button {
-                        margin: 2px;
+                    cursor: grabbing;
+
+                    &:hover {
+                        border: 2px solid blue;
+                        color: blue;
                     }
                 }
             }
