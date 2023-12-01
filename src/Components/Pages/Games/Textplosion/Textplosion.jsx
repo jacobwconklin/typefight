@@ -17,6 +17,7 @@ const Textplosion = (props) => {
     // const [modalIsOpen, setModalIsOpen] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [isInHotSeat, setIsInHotSeat] = useState(false);
+    const [playerFont, setPlayerFont] = useState(null);
     const [wordToPump, setWordToPump] = useState(generate()); // start with random word
     const [typedPumpWord, setTypedPumpWord] = useState("");
 
@@ -40,7 +41,6 @@ const Textplosion = (props) => {
                         })
                     });
                     const data = await result.json();
-                    console.log("Textplosion Status: ", data);
                     setGameStatus(data);
                     // check for only one living player left to set gameOver
                     if (data.players.filter(player => !player.blownUp).length <= 1) {
@@ -51,6 +51,8 @@ const Textplosion = (props) => {
                     // to see if the current player is in the hot seat (if not blownUp and at position 0)
                     const matchingPlayer = data.players.find(player => player.playerId === playerId);
                     if (matchingPlayer) {
+                        // set font only once
+                        setPlayerFont(matchingPlayer.font);
                         // only set it if it changes
                         if (isInHotSeat !== (!matchingPlayer.blownUp && matchingPlayer.position === 0)) {
                             setIsInHotSeat(!matchingPlayer.blownUp && matchingPlayer.position === 0);
@@ -111,7 +113,9 @@ const Textplosion = (props) => {
                         <div className='PumpScreen'>
                             <h1>type the words below to pump the balloon:</h1>
                             <div className='PumpInputBox'>
-                                <h2>{wordToPump}</h2>
+                                <h2 style={{fontFamily: ('\'' + playerFont + '\'')}}>
+                                    {wordToPump}
+                                </h2>
                                 <Input
                                     className='PumpInput'
                                     placeholder='Type Here'

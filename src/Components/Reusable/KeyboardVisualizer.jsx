@@ -2,7 +2,7 @@
 import './KeyboardVisualizer.scss';
 import windowsIcon from '../../Assets/Site/windowsIconBlack.png';
 import { useState } from 'react';
-import { Button, Slider } from 'antd';
+import { Slider } from 'antd';
 import settings from '../../Assets/Site/cog.svg';
 import ellipsis from '../../Assets/Site/horizontal-ellipsis.svg';
 
@@ -41,22 +41,18 @@ const KeyboardVisualizer = (props) => {
     // const [upTranslate, setUpTranlate] = useState(0);
     // const [rightTranslate, setRightTranslate] = useState(0);
     
-    const formatter = (value) => `${value}%`;   
+    const percentFormatter = (value) => `${value}%`;
+    const pixelFormatter = (value) => `${value}px`;   
 
 
     // handle dragging keyboard from: https://www.w3schools.com/howto/howto_js_draggable.asp
     const dragElement = (elmnt) => {
-        console.log(elmnt);
         if (elmnt) {
             var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
             if (document.getElementById("drag-box")) {
-                // if present, the header is where you move the DIV from:
+                // if present only allow moving by the drag-box
                 document.getElementById("drag-box").onmousedown = dragMouseDown;
-            } else {
-                // otherwise, move the DIV from anywhere inside the DIV: 
-                elmnt.onmousedown = dragMouseDown;
-            }
-
+            } 
         }
 
         function dragMouseDown(e) {
@@ -90,97 +86,18 @@ const KeyboardVisualizer = (props) => {
         }
     }
 
+    // when keyboard is first mounted drag-box may not appear on document yet
     dragElement(document.getElementById("keyboard-visualizer"));
+    setTimeout(() => {
+        dragElement(document.getElementById("keyboard-visualizer"));
+    }, 300);
+
 
     return (
         <div className='KeyboardVisualizer' id='keyboard-visualizer'
             style={{opacity: (opacity + "%"), width: size + 'px', fontSize: `${size * 0.0178}px`, }}
         >
-            <div className='Settings'>
-                {
-                    showSettings ? 
-                    <div className='ShownSettings'>
-                        <div className='ShownSettingsIndicator'
-                            onClick={() => {
-                                setShowSettings(false);
-                            }}
-                        >
-                            <img className='SettingsGear' src={settings} alt='Hide Settings' />
-                        </div>
-                        <div className='OpacitySetting'>
-                            <h4>Opacity</h4>               
-                            <Slider 
-                                tooltip={{ formatter }} 
-                                onChange={(e) => {
-                                    setOpacity(e);
-                                }}
-                                // onAfterChange calls when user lets go with mouse if desired
-                                defaultValue={50}
-                                min={10}
-                            />
-                        </div>
-                        <div className='SizeSetting'>
-                            <h4 style={{marginBottom: '5px'}} >Size</h4>               
-                            <div className='SizeButtons'>
-                                <Button
-                                    onClick={() => {
-                                        setSize(currSize => currSize + 25);
-                                    }}
-                                    disabled = {size > screen.width / 2}
-                                >+</Button>
-                                <Button
-                                    onClick={() => {
-                                        setSize(currSize => currSize - 25);
-                                    }}
-                                    disabled = {size < 450}
-                                >-</Button>
-                            </div>
-                        </div>
-                        <div className='PositionSetting'>
-                            <h4  style={{marginBottom: '5px'}} >Position</h4>               
-                            <div className='SizeButtons'>
-                                {/* <Button
-                                    onClick={() => {
-                                        setRightTranslate(currTranslate => currTranslate - 25);
-                                    }}
-                                    disabled = {rightTranslate > 1000}
-                                >&larr;</Button>
-                                <Button
-                                    onClick={() => {
-                                        setUpTranlate(currTranslate => currTranslate - 25);
-                                    }}
-                                    disabled = {rightTranslate > 1000}
-                                >&uarr;</Button>
-                                <Button
-                                    onClick={() => {
-                                        setUpTranlate(currTranslate => currTranslate + 25);
-                                    }}
-                                    disabled = {rightTranslate > 1000}
-                                >&darr;</Button>
-                                <Button
-                                    onClick={() => {
-                                        setRightTranslate(currTranslate => currTranslate + 25);
-                                    }}
-                                    disabled = {rightTranslate > 1000}
-                                >&rarr;</Button> */}
-                                <div className='DragBox' id='drag-box'>
-                                    Click Here To Drag
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    :
-                    <div className='HiddenSettings'>
-                        <div className='HiddenSettingsIndicator'
-                            onClick={() => {
-                                setShowSettings(true);
-                            }}
-                        >
-                            <img className='Ellipsis' src={ellipsis} alt='Show Settings' />
-                        </div>
-                    </div>
-                }
-            </div>
+            
             <div className='Rows' style={{height: (~~(size / 3)) + 'px'}}>
                 <div className='Row'>
                     <div className='Key Double Tilde' id='Backquote'>
@@ -492,6 +409,67 @@ const KeyboardVisualizer = (props) => {
                         &rarr;
                     </div>
                 </div>
+            </div>
+            <div className='Settings'>
+                {
+                    showSettings ? 
+                    <div className='ShownSettings'>
+                        <div className='ShownSettingsIndicator'
+                            onClick={() => {
+                                setShowSettings(false);
+                            }}
+                        >
+                            <img className='SettingsGear' src={settings} alt='Hide Settings' />
+                        </div>
+                        <div className='OpacitySetting'>
+                            <h4>Opacity</h4>               
+                            <Slider 
+                                tooltip={{ formatter: percentFormatter }} 
+                                onChange={(e) => {
+                                    setOpacity(e);
+                                }}
+                                // onAfterChange calls when user lets go with mouse if desired
+                                defaultValue={50}
+                                min={10}
+                            />
+                        </div>
+                        <div className='SizeSetting'>
+                            <h4 >Size</h4>    
+                            <Slider 
+                                tooltip={{ formatter: pixelFormatter }} 
+                                onChange={(e) => {
+                                    setSize(e);
+                                }}
+                                // onAfterChange calls when user lets go with mouse if desired
+                                defaultValue={screen.width / 2.5}
+                                min={450}
+                                max={~~(screen.width / 1.0)} // TODO haven't settled on this tried 2 and 1.5 leaving 1 for now for fun
+                            />
+                        </div>
+                        <div className='PositionSetting'>
+                            <h4  style={{marginBottom: '5px'}} >Position</h4> 
+                            <div className='DragBox' id='drag-box'>
+                                Click Here To Drag
+                            </div>
+                        </div>
+                    </div>
+                    :
+                    <div className='HiddenSettings'>
+                        <div className='HiddenSettingsIndicator'
+                            onClick={() => {
+                                setShowSettings(true);
+                                setTimeout(() => {
+                                    dragElement(document.getElementById("keyboard-visualizer"));
+                                    setTimeout(() => {
+                                        dragElement(document.getElementById("keyboard-visualizer"));
+                                    }, 200)
+                                }, 100)
+                            }}
+                        >
+                            <img className='Ellipsis' src={ellipsis} alt='Show Settings' />
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     )

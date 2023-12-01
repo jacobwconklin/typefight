@@ -50,7 +50,11 @@ const App = () => {
               </div>
           </div>
           {
-            <div className='KeyboardHolder' style={{display: keyboardVisible ? 'flex' : 'none'}}>
+            // use this to simply hide keyboard but maintain changes 
+            // (however users might move keyboard to where they can no longer use it) 
+            // style={{display: keyboardVisible ? 'flex' : 'none'}}
+            keyboardVisible &&
+            <div className='KeyboardHolder'  >             
               <KeyboardVisualizer />
             </div>
           }

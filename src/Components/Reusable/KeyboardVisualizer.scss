@@ -85,8 +85,10 @@
             .HiddenSettingsIndicator {
                 height: 20px;
                 width: calc(100% - 15px);
-                padding: 3px 0px 3px 15px;
+                padding: 3px 0px 0px 15px;
                 text-align: left;
+                display: flex;
+                align-items: center;
 
                 &:hover {
                     cursor: pointer;

@@ -1,14 +1,67 @@
 .Avatar {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 
-    height: 100px;
+    height: 170px;
     width: 100px;
 
-    p {
+    .GhostPlayer {
+    }
+
+    .HotSeatPlayer {
+    }
+
+    .PumpingPlayer {
+    }
+
+    .PlayerName {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        height: 70px;
         text-align: center;
         margin: 5px 0px 0px 0px;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
+    }
+
+    .IconButton {
+        position: absolute;
+        bottom: 20px;
+        left: 8;
+        right: 8px;
+    }
+
+    .AirPump {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        bottom: 5px;
+        left: 25px;
+        right: 25px;
+    }
+
+    .HotSeat {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        bottom: 5px;
+        left: 25px;
+        right: 25px;
+    }
+
+    .Skull {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        bottom: 48px;
+        left: 25;
+        right: 25px;
     }
 }

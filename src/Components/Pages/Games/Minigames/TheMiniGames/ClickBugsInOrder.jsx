@@ -36,7 +36,7 @@ const ClickBugsInOrder = (props) => {
                     <h1>Nice Job</h1>
                 </div>
                 :
-                <p style={{textAlign: 'center', marginTop: '50px'}}>Click on the bugs in order!</p>
+                <p style={{textAlign: 'center', marginTop: '50px', pointerEvents: 'none'}}>Click on the bugs in order!</p>
             }
             <div className='BugHolder Beetle' id='beetle-bug-holder'
                 onClick={() => {
