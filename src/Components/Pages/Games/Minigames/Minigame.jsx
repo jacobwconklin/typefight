@@ -6,8 +6,10 @@
 // played games back and shuffle them. 
 import { useEffect, useState } from 'react';
 import './Minigame.scss';
-import ClickBugsInOrder from './TheMiniGames/ClickBugsInOrder';
+// import ClickBugsInOrder from './TheMiniGames/ClickBugsInOrder';
 import WordNotColor from './TheMiniGames/WordNotColor';
+import RightToLeft from './TheMiniGames/RightToLeft';
+import AlphabeticalOrder from './TheMiniGames/AlphabeticalOrder';
 
 // TODO design all mini-games to fit in a 400 x 400 box
 
@@ -44,7 +46,9 @@ const Minigame = (props) => {
 
         const allMinigames = [
             <WordNotColor completeMinigame={completeMinigameMiddleware} />,
-            <ClickBugsInOrder completeMinigame={completeMinigameMiddleware} />
+            <RightToLeft completeMinigame={completeMinigameMiddleware} />,
+            <AlphabeticalOrder completeMinigame={completeMinigameMiddleware} />,
+            // <ClickBugsInOrder completeMinigame={completeMinigameMiddleware} />
         ]
 
         // only set a minigame if selectedMinigame is null

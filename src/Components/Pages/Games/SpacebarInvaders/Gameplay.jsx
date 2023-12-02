@@ -234,6 +234,7 @@ const Gameplay = (props) => {
                             placeholder='Type Here'
                             autoFocus
                             value={typedText}
+                            onKeyDown={(key) => {if (key.code === 'Enter') setTypedText('')}}
                             onChange={(e) => {
                                 e.preventDefault();
                                 setTypedText(e.target.value);

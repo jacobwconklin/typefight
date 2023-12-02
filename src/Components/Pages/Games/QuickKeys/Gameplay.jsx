@@ -174,6 +174,8 @@ const Gameplay = (props) => {
                             // ignore SHIFT
                             if (key === "Shift") {
                                 // do nothing
+                            } else if (key === 'Enter') {
+                                setTextInput('');
                             }
                             // determine between space, correct letter, wrong letter, and backspace
                             else if (key === remainingText[0] || (key === " " && (remainingText[0] === '\n' || remainingText[0] === '\t'))) {

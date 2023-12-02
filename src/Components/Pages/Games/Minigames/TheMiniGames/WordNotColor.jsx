@@ -31,7 +31,7 @@ const WordNotColor = (props) => {
             "ivory", "champagne", "mauve", "burgundy"
         ];
 
-        const numberOfWords = 10;
+        const numberOfWords = 14;
         setSelectedWords(colorWords.sort(() => Math.random() - 0.5).slice(0, numberOfWords));
         const appearanceColors = [];
         for (let i = 0; i < numberOfWords; i++) {
@@ -59,11 +59,16 @@ const WordNotColor = (props) => {
                     ))
                 }
             </div>
+            {
+                typedWords.length === selectedWords.length && 
+                <h1 style={{textAlign: 'center'}}>Excellent!</h1>
+            }
             <div className='inputHolder'>
                 <Input 
                     className='inputBox'
                     placeholder='Type Here'
                     value={typedWord}
+                    onKeyDown={(key) => {if (key.code === 'Enter') setTypedWord('')}}
                     onChange={e => {
                         const cleanedTypedWord = e.target.value.toLowerCase().trim();
                         if ( !typedWords.includes(cleanedTypedWord) && 

@@ -120,6 +120,7 @@ const Textplosion = (props) => {
                                     className='PumpInput'
                                     placeholder='Type Here'
                                     value={typedPumpWord}
+                                    onKeyDown={(key) => {if (key.code === 'Enter') setTypedPumpWord('')}}
                                     onChange={e => {
                                         if ( e.target.value === wordToPump ) {
                                             // perform fetch to let backend know to pump
