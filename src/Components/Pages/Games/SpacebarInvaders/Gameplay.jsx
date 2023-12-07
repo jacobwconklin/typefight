@@ -141,9 +141,9 @@ const Gameplay = (props) => {
                         const displayEnemyElement = document.getElementById(displayEnemy._id);
                         if (displayEnemyElement) {
                             // convert x and y based on screen size
-                            if (screen.width > 800 && screen.height > 1000) {
+                            if (window.innerWidth > 800 && window.innerHeight > 1000) {
                                 displayEnemyElement.style.translate = `${enemy.x}px ${enemy.y}px`;
-                            } else if (screen.width > 550 && screen.height > 750) {
+                            } else if (window.innerWidth > 550 && window.innerHeight > 750) {
                                 displayEnemyElement.style.translate = `${~~(enemy.x * 0.67)}px ${~~(enemy.y * 0.67)}px`;
                             } else {
                                 displayEnemyElement.style.translate = `${~~(enemy.x * 0.33)}px ${~~(enemy.y * 0.33)}px`;
@@ -191,11 +191,14 @@ const Gameplay = (props) => {
             (x > 0 ? 0.7 : Math.PI + 0.7) : -0.77}rad)`;
         setTimeout(() => {
             // move missile based on screen size 
-            if (screen.width > 800 && screen.height > 1000) {
+            if (window.innerWidth > 800 && window.innerHeight > 1000) {
+                console.log("one");
                 spawnImage.style.translate = `${x}px ${y}px`
-            } else if (screen.width > 550 && screen.height > 750) {
+            } else if (window.innerWidth > 550 && window.innerHeight > 750) {
+                console.log("two");
                 spawnImage.style.translate = `${~~(x * 0.67)}px ${~~(y * 0.67)}px`
             } else {
+                console.log("three");
                 spawnImage.style.translate = `${~~(x * 0.33)}px ${~(y * 0.33)}px`
             }
             setTimeout(() => {

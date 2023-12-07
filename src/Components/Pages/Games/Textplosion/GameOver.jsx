@@ -30,7 +30,7 @@ const GameOver = (props) => {
     return (
         <div className='TextplosionGameOver'>
             <h1>The Winner is: </h1>
-            <h1>{props.status.players.find(player => !player.blownUp).alias}</h1>
+            <h1>{props?.status?.players?.find(player => !player.blownUp)?.alias}</h1>
             <Button 
                 onClick={ () => pickNewGame()}
             >New Game</Button>

@@ -8,7 +8,7 @@ const AlphabeticalOrder = (props) => {
 
     // Todo should have re-usable timer, on timer complete can return false but for now only can return true to parent component
 
-    const [selectedWords, setSelectedWords] = useState(generate(8));
+    const [selectedWords, setSelectedWords] = useState(generate(10));
     const [typedWord, setTypedWord] = useState("");
 
     return (
@@ -32,6 +32,7 @@ const AlphabeticalOrder = (props) => {
             }
             <div className='inputHolder'>
                 <Input 
+                    autoFocus
                     className='inputBox'
                     placeholder='Type Here'
                     value={typedWord}

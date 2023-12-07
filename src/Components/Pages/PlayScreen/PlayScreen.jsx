@@ -20,6 +20,8 @@ const PlayScreen = (props) => {
     // If game is selected show that game
 
     // type of player either host, join, or solo
+    // TODO may add type to some context so that only host and solo players can perform certain 
+    // actions such as selecting the game or prompt, etc. 
     const { type, code } = useParams();
     
     // session status can be held in state here and continually updated from server as this component

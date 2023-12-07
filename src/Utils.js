@@ -34,7 +34,6 @@
         'Nova Square',
         'Reggae One',
         'Roboto',
-        'Roboto Serif',
         'Times New Roman',
         'Tomorrow'
     ]

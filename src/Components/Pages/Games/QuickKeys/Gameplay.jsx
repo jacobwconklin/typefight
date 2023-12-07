@@ -174,6 +174,8 @@ const Gameplay = (props) => {
                             // ignore SHIFT
                             if (key === "Shift") {
                                 // do nothing
+                            } else if (key === 'Backspace') {
+                                setTextInput(textInput.length > 1 ? textInput.substring(0,  textInput.length - 1) : '');
                             } else if (key === 'Enter') {
                                 setTextInput('');
                             }

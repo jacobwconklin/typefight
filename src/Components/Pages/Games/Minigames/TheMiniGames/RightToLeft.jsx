@@ -38,6 +38,7 @@ const RightToLeft = (props) => {
             }
             <div className='inputHolder'>
                 <Input 
+                    autoFocus
                     className='inputBox'
                     placeholder='Type Here'
                     value={typedWord}

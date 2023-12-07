@@ -37,7 +37,7 @@ const KeyboardVisualizer = (props) => {
     // handles opening settings bar when clicked
     const [showSettings, setShowSettings] = useState(true);
     const [opacity, setOpacity] = useState(75);
-    const [size, setSize] = useState(screen.width / 2.5);
+    const [size, setSize] = useState(window.innerWidth / 2.5);
     // const [upTranslate, setUpTranlate] = useState(0);
     // const [rightTranslate, setRightTranslate] = useState(0);
     
@@ -441,9 +441,9 @@ const KeyboardVisualizer = (props) => {
                                     setSize(e);
                                 }}
                                 // onAfterChange calls when user lets go with mouse if desired
-                                defaultValue={screen.width / 2.5}
+                                defaultValue={window.innerWidth / 2.5}
                                 min={450}
-                                max={~~(screen.width / 1.0)} // TODO haven't settled on this tried 2 and 1.5 leaving 1 for now for fun
+                                max={~~(window.innerWidth / 1.0)} // TODO haven't settled on this tried 2 and 1.5 leaving 1 for now for fun
                             />
                         </div>
                         <div className='PositionSetting'>

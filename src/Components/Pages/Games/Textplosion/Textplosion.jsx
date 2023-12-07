@@ -43,7 +43,7 @@ const Textplosion = (props) => {
                     const data = await result.json();
                     setGameStatus(data);
                     // check for only one living player left to set gameOver
-                    if (data.players.filter(player => !player.blownUp).length <= 1) {
+                    if (data.players && data.players.filter(player => !player.blownUp).length <= 1) {
                         // end of game reached one player left not blown up
                         setGameOver(true);
                     }
@@ -55,6 +55,13 @@ const Textplosion = (props) => {
                         setPlayerFont(matchingPlayer.font);
                         // only set it if it changes
                         if (isInHotSeat !== (!matchingPlayer.blownUp && matchingPlayer.position === 0)) {
+                            // has changed, if player was in hotseat previously re-focus on input
+                            if (isInHotSeat) {
+                                setTimeout(() => {
+                                    document.getElementById("pump-input").focus();
+                                }, 100);
+                            }
+                            // apply change (either now in or no longer in hot seat)
                             setIsInHotSeat(!matchingPlayer.blownUp && matchingPlayer.position === 0);
                         }
                     }
@@ -117,7 +124,9 @@ const Textplosion = (props) => {
                                     {wordToPump}
                                 </h2>
                                 <Input
+                                    autoFocus
                                     className='PumpInput'
+                                    id='pump-input'
                                     placeholder='Type Here'
                                     value={typedPumpWord}
                                     onKeyDown={(key) => {if (key.code === 'Enter') setTypedPumpWord('')}}
