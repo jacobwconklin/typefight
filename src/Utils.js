@@ -8,8 +8,8 @@
 
     // Get the base URL of the back-end server - change to quickly switche between locally run and deployed back-end
     export const getServerBaseUrl = () => {
-        return "https://typefightbackend.azurewebsites.net/";
-        // return "http://localhost:3000/";
+        // return "https://typefightbackend.azurewebsites.net/";
+        return "http://localhost:3000/";
     }
 
     // standard header for hitting the back-end server
@@ -17,6 +17,43 @@
         return {
             "Accept": "*/*",
             "Content-Type": "application/json"
+        }
+    }
+
+    // perform wipe functions when a player closes their browser, or returns to the home page.
+    // relies on checking local storage to see if player is in a game and in a session and then clears that local storage
+    export const wipePlayer = () => {
+        // need playerId to leave game or session
+        const player = localStorage.getItem("player");
+        if (player) {
+            // check local storage for current session (just the session Id)
+            const session = localStorage.getItem("session");
+            if (session) {
+                // check local storage for current game
+                const game = localStorage.getItem("game");
+                if (game) {
+                    // need to wipe the player from this game
+                    // (This means whenever a player exits a session it will kick
+                    // everyone out of that game but not the session).
+                    fetch(getServerBaseUrl() + game + "/wipe", {
+                        method: "POST",
+                        headers: getStandardHeader(),
+                        body: JSON.stringify({
+                            sessionId: session
+                        })
+                    });
+                }
+
+                // Now exit the session itself
+                fetch(getServerBaseUrl() + "session/exit", {
+                    method: "POST",
+                    headers: getStandardHeader(),
+                    body: JSON.stringify({
+                        sessionId: session,
+                        playerId: player
+                    })
+                });
+            }
         }
     }
 

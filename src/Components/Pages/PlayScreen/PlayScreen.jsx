@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './PlayScreen.scss';
-import { getServerBaseUrl, getStandardHeader } from '../../../Utils';
+import { getServerBaseUrl, getStandardHeader, wipePlayer } from '../../../Utils';
 import GameSelect from '../GameSelect/GameSelect';
 import NewPlayer from '../Users/NewPlayer';
-import { useParams } from 'react-router-dom';
+import { useBeforeUnload, useParams } from 'react-router-dom';
 import QuickKeys from '../Games/QuickKeys/QuickKeys';
 import SpacebarInvaders from '../Games/SpacebarInvaders/SpacebarInvaders';
 import { BackgroundAudioContext } from '../../../App';
 import Textplosion from '../Games/Textplosion/Textplosion';
+import TypeFlight from '../Games/TypeFlight/TypeFlight';
 
 // PlayScreen. Once user clicks "host", "join", or "solo", play screen uses conditional 
 // rendering to control the user's screen rather than traditional router navigation. Manually
@@ -37,6 +38,16 @@ const PlayScreen = (props) => {
     });
 
     const {backgroundMusic, setBackgroundMusic} = useContext(BackgroundAudioContext);
+
+    // handle user exiting their session by going home or closing the tab
+    // useful as described here: in the future I could use local storage to track a 
+    // player's information if they are logged in
+    // https://reactrouter.com/en/main/hooks/use-before-unload
+    useBeforeUnload(
+        React.useCallback(() => {
+            wipePlayer();
+        }, [])
+    );
   
     useEffect(() => {
   
@@ -95,12 +106,14 @@ const PlayScreen = (props) => {
 
     // get jsx for selected game
     const getSelectedGame = () => {
-        if (session.selected_game === "Quick Keys") {
+        if (session.selected_game === "quick-keys") {
             return <QuickKeys />
-        } else if (session.selected_game === "Spacebar Invaders") {
+        } else if (session.selected_game === "spacebar-invaders") {
             return <SpacebarInvaders />
-        } else if (session.selected_game === "Textplosion") {
+        } else if (session.selected_game === "textplosion") {
             return <Textplosion />
+        } else if (session.selected_game === "typeflight") {
+            return <TypeFlight />
         } else {
             return <p>Game Not Supported</p>
         }

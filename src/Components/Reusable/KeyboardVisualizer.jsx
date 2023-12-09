@@ -37,7 +37,7 @@ const KeyboardVisualizer = (props) => {
     // handles opening settings bar when clicked
     const [showSettings, setShowSettings] = useState(true);
     const [opacity, setOpacity] = useState(75);
-    const [size, setSize] = useState(window.innerWidth / 2.5);
+    const [size, setSize] = useState(window.innerWidth / 2.5 < 450 ? 450 : window.innerWidth / 2.5);
     // const [upTranslate, setUpTranlate] = useState(0);
     // const [rightTranslate, setRightTranslate] = useState(0);
     

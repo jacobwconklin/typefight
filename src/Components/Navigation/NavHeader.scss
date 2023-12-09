@@ -66,3 +66,29 @@
         width: 150px;
     }
 }
+
+.ReturnHomeModalHolder {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 11;
+
+    .ReturnHomeModal {
+        background-color: white;
+        border: 3px solid black;
+        padding: 40px;
+        text-align: center;
+        z-index: 12;
+
+        .ReturnHomeButtons {
+            display: flex;
+            justify-content: space-evenly;
+        }
+    }
+}

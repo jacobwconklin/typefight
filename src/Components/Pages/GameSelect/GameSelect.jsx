@@ -13,6 +13,13 @@ import airPump from '../../../Assets/GameCards/Textplosion/air-pump.svg';
 import basicBalloon from '../../../Assets/GameCards/Textplosion/basic-balloon.svg';
 import dynamite from '../../../Assets/GameCards/Textplosion/dynamite.svg';
 import handsUp from '../../../Assets/GameCards/Textplosion/hands-up.svg';
+
+import bombEmoji from '../../../Assets/GameCards/TypeFlight/bomb.svg';
+import fireEmoji from '../../../Assets/GameCards/TypeFlight/fire-emoji.svg';
+import jetpack from '../../../Assets/GameCards/TypeFlight/jetpack.svg';
+import lightning from '../../../Assets/GameCards/TypeFlight/lightning-bolt.svg';
+import smileSunglassesEmoji from '../../../Assets/GameCards/TypeFlight/smiling-face-with-sunglasses.svg';
+
 import { useContext } from 'react';
 import { SessionContext } from '../PlayScreen/PlayScreen';
 import { getServerBaseUrl, getStandardHeader } from '../../../Utils';
@@ -25,6 +32,9 @@ const GameSelect = (props) => {
 
     // tells session that a game has been selected (TODO May want to make only available to hosts)
     const selectGame = async (gameName) => {
+        // save current game into local storage so that game can be wiped if one player navigates home
+        // or closes browser
+        localStorage.game = gameName;
         await fetch(getServerBaseUrl() + "session/select-game", {
             method: "POST",
             headers: getStandardHeader(),
@@ -46,7 +56,7 @@ const GameSelect = (props) => {
             <ScrollingText />
             <div className='GamesBox'>
                 <GameCard game={{title:"TypeFight"}}></GameCard>
-                <div className='GameCard' onClick={() => {selectGame("Quick Keys")}}  >
+                <div className='GameCard' onClick={() => {selectGame("quick-keys")}}  >
                     <h1>Quick Keys</h1>
                     <h3>Competitive</h3>
                     <div className='CardIcons'>
@@ -57,7 +67,7 @@ const GameSelect = (props) => {
                         <img  className='CardIcon' style={{translate: '-35px 20px', zIndex: 5}} src={finish} alt='finish line'/>
                     </div>
                 </div>
-                <div className='GameCard' onClick={() => {selectGame("Spacebar Invaders")}}  >
+                <div className='GameCard' onClick={() => {selectGame("spacebar-invaders")}}  >
                     <h1>Spacebar Invaders</h1>
                     <h3>Cooperative</h3>
                     <div className='CardIcons'>
@@ -68,7 +78,7 @@ const GameSelect = (props) => {
                 </div>
                 <div className={session?.players?.length > 1 ? 'GameCard' : 'GameCard DisabledCard'} onClick={() => {
                     if (session?.players?.length > 1) {
-                        selectGame("Textplosion");
+                        selectGame("textplosion");
                     }
                 }}>
                     <h1>Textplosion</h1>
@@ -78,6 +88,17 @@ const GameSelect = (props) => {
                         <img  className='CardIcon' style={{height:'45px', width:'45px', translate: '-57px 18px'}} src={dynamite} alt='dynamite' />
                         <img  className='CardIcon' style={{height:'60px', width:'60px', translate: '40px 20px'}} src={handsUp} alt='person'/>
                         <img  className='CardIcon' style={{height:'40px', width:'40px', translate: '-40px 39px'}} src={airPump} alt='pump'/>
+                    </div>
+                </div>
+                <div className='GameCard' onClick={() => {selectGame("typeflight")}}  >
+                    <h1>Type Flight</h1>
+                    <h3>Cooperative</h3>
+                    <div className='CardIcons'>
+                        <img  className='CardIcon' style={{height:'60px', width:'60px', translate: '70px 30px'}} src={fireEmoji} alt='fire' />
+                        <img  className='CardIcon' style={{height:'130px', width:'130px', translate: '-20px 40px'}} src={bombEmoji} alt='bomb' />
+                        <img  className='CardIcon' style={{height:'70px', width:'70px', translate: '-20px 20px'}} src={jetpack} alt='jetpack' />
+                        <img  className='CardIcon' style={{height:'120px', width:'120px', translate: '-15px -10px'}} src={lightning} alt='lightning' />
+                        <img  className='CardIcon' style={{height:'35px', width:'35px', translate: '-192px 30px'}} src={smileSunglassesEmoji} alt='smile sunglasses' />
                     </div>
                 </div>
             </div>

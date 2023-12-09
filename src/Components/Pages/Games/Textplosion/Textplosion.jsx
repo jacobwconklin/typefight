@@ -73,7 +73,6 @@ const Textplosion = (props) => {
   
         //Clearing the interval
         return () => {
-            // TODO wipe game here
             clearInterval(interval);
         }
     }, [sessionId, playerId, isInHotSeat]);

@@ -24,6 +24,7 @@ const GameOver = (props) => {
                 sessionId
             })
         });
+        
         await fetch(getServerBaseUrl() + "session/leave-game", {
             method: "POST",
             headers: getStandardHeader(),
@@ -42,13 +43,7 @@ const GameOver = (props) => {
                 sessionId
             })
         });
-        // await fetch(getServerBaseUrl() + "session/leave-game", {
-        //     method: "POST",
-        //     headers: getStandardHeader(),
-        //     body: JSON.stringify({
-        //         sessionId
-        //     })
-        // });
+
         await fetch(getServerBaseUrl() + "session/select-game", {
             method: "POST",
             headers: getStandardHeader(),

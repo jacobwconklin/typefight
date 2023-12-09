@@ -44,6 +44,10 @@ const NewPlayer = (props) => {
         const data = await result.json();
         setPlayerId(data.player._id);
         setSessionId(data.session._id);
+        // Also save player and session into local storage so navigating home and closing the tab can handle 
+        // wiping the current game and exiting a player from the session
+        localStorage.player = data.player._id;
+        localStorage.session = data.session._id;
         if (data.session.join_code) {
             setJoin_code(data.session.join_code);
         }

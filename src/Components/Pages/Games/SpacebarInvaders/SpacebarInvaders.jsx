@@ -47,7 +47,6 @@ const SpacebarInvaders = (props) => {
   
         //Clearing the interval
         return () => {
-            // TODO wipe game here
             clearInterval(interval);
         }
     }, [gameStatus, sessionId]);

@@ -53,7 +53,6 @@ const QuickKeys = (props) => {
   
         //Clearing the interval
         return () => {
-            // TODO wipe game here
             clearInterval(interval);
         }
     }, [gameStatus, sessionId, playerId]);
