@@ -21,7 +21,8 @@ const TypeFlight = (props) => {
     const [gameArray, setGameArray] = useState(Array.apply({}, Array(100)));
     // Game Status JUST to be used for startTimeAbsolute and endTimeAbsolute
     const [gameStatus, setGameStatus] = useState(null);
-    const [playerIsAlive, setPlayerIsAlive] = useState(true);
+    const [matchingPlayer, setMatchingPlayer] = useState({isAlive: true});
+    const [playerToRevive, setPlayerToRevive] = useState(null);
 
     // get playerId and sessionId from context
     const { sessionId, playerId } = useContext(SessionContext);
@@ -68,15 +69,15 @@ const TypeFlight = (props) => {
 
                     // go through players and add them to gameArray
                     data.players.forEach(player => {
-                        if (player.isAlive) {
-                            // add living player
+                        if (player.isAlive && !player.playerId === playerId) {
+                            // add living player IF not the matching player (want to do them based just on playerPosition)
                             newGameArray[player.position] = newGameArray[player.position] 
                             ? newGameArray[player.position]["player"] = {...newGameArray[player.position], player} : {player};
-                        } else {
+                        } else if (!player.isAlive) {
                             // add gravestone
                             newGameArray[player.position] = newGameArray[player.position] 
                             ? newGameArray[player.position]["deadPlayer"] 
-                            = {...newGameArray[player.position], deadPlayer: true} : {deadPlayer: true};
+                            = {...newGameArray[player.position], deadPlayer: player} : {deadPlayer: player};
                         }
                     });
 
@@ -90,17 +91,18 @@ const TypeFlight = (props) => {
                     if (matchingPlayer && playerPosition === null) {
                         setPlayerPosition(matchingPlayer.position);
                     }
-                    if (matchingPlayer && matchingPlayer.isAlive) {
-                        // re-add matching player so they show up on top of everyone else
-                        setPlayerIsAlive(true);                            
-                        newGameArray[matchingPlayer.position] = newGameArray[matchingPlayer.position] 
-                            ? newGameArray[matchingPlayer.position]["player"] 
-                            = {...newGameArray[matchingPlayer.position], player: matchingPlayer} : {player: matchingPlayer} ;
-                    } else if (matchingPlayer && !matchingPlayer.isAlive) {
-                        // record that curr player is dead to turn off controls
-                        setPlayerIsAlive(false);
-                    }
+                    if (matchingPlayer) {
+                        // save matching player's information
+                        setMatchingPlayer(matchingPlayer);
 
+                        // check if user's player is on top of a dead player they can revive
+                        // but don't re-set the value if it's already set to the same player
+                        if ( newGameArray[matchingPlayer.position]["deadPlayer"] && 
+                            (playerToRevive == null || 
+                                playerToRevive.playerId !== newGameArray[matchingPlayer.position]["deadPlayer"].playerId ) ) {
+                            setPlayerToRevive(newGameArray[matchingPlayer.position]["deadPlayer"]);
+                        }   
+                    }
                     setGameArray(newGameArray);
                 }
             } catch (error) {
@@ -112,7 +114,7 @@ const TypeFlight = (props) => {
         return () => {
             clearInterval(interval);
         }
-    }, [playerPosition, playerId, sessionId, setPlayerIsAlive]);
+    }, [playerPosition, playerId, sessionId, setPlayerToRevive, playerToRevive]);
 
     return (
         <div className='TypeFlight'>
@@ -122,11 +124,21 @@ const TypeFlight = (props) => {
             }
             {
                 !gameStatus?.endTimeAbsolute && 
-                <Controls playerPosition={playerPosition} setPlayerPosition={setPlayerPosition} playerIsAlive={playerIsAlive} />
+                <Controls 
+                    playerPosition={playerPosition} 
+                    setPlayerPosition={setPlayerPosition} 
+                    matchingPlayer={matchingPlayer} 
+                    playerToRevive={playerToRevive}
+                    gameStatus={gameStatus}    
+                />
             }
             {
                 !gameStatus?.endTimeAbsolute && 
-                <Gameplay gameArray={gameArray} gameStatus={gameStatus}/>
+                <Gameplay 
+                    gameArray={gameArray} 
+                    matchingPlayer={matchingPlayer} 
+                    playerPosition={playerPosition}
+                />
             }
         </div>
     )

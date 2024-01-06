@@ -17,6 +17,7 @@ const Controls = (props) => {
     const [leftWord, setLeftWord] = useState(generate());
     const [rightWord, setRightWord] = useState(generate());
     const [downWord, setDownWord] = useState(generate());
+    const [revivePhrase, setRevivePhrase] = useState(generate({ exactly: 5, join: " " }));
 
     const { playerId, sessionId } = useContext(SessionContext);
 
@@ -39,6 +40,23 @@ const Controls = (props) => {
         }
     }
 
+    // call to hit revive the player the user is over
+    const revive = () => {
+        setRevivePhrase(generate({ exactly: 5, join: " " }));
+        // now tell backend
+        try {
+            fetch(getServerBaseUrl() + "typeflight/revive", {
+                method: "POST",
+                headers: getStandardHeader(),
+                body: JSON.stringify({
+                    playerId: props?.playerToRevive.playerId
+                })
+            });
+        } catch(error) {
+            console.log("Error updating player position in typeflight:", error);
+        }
+    }
+
     return (
         <div className='Controls'>
             <h3>Type to Move</h3>
@@ -46,7 +64,7 @@ const Controls = (props) => {
                 <Input placeholder='Type Here'
                     autoFocus
                     value={textInput}
-                    disabled={!props?.playerIsAlive}
+                    disabled={!props?.matchingPlayer?.isAlive}
                     onChange={(e) => {
                         // check if value equals any of the 4 directions
                         const cleanedTypedWord = e.target.value.trim().toLowerCase();
@@ -94,6 +112,9 @@ const Controls = (props) => {
                             // either way reset downWord and clear textInput
                             setDownWord(generate());
                             setTextInput("");
+                        } else if (cleanedTypedWord === revivePhrase && props?.playerToRevive) {
+                            // revive that player!
+                            revive();
                         } else {
                             setTextInput(e.target.value);
                         }
@@ -141,6 +162,13 @@ const Controls = (props) => {
             <div>
                 Time: {(Date.now() - props?.gameStatus?.startTimeAbsolute) / 1000}s
             </div>
+            {
+                props?.playerToRevive && 
+                <div>
+                    <p className='title-font' >REVIVE</p>
+                    {revivePhrase}
+                </div>
+            }
         </div>
     )
 }

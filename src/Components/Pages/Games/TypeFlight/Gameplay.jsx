@@ -40,7 +40,25 @@ const Gameplay = (props) => {
                             <img className='TileIcon EventTile' src={bomb} alt='event' />
                         }
                         {
-                            val?.player &&
+                            // place user's matching player in position instead of any other player if they are there
+                            index === props?.playerPosition && props?.matchingPlayer?.isAlive &&
+                            <div className='PlayerIconHolder TileIcon'>
+                                <img 
+                                    style={{backgroundColor: props.matchingPlayer?.color,
+                                        // could make a useEffect that sets a state variable in case they change their screen size
+                                        // but that is overkill for now
+                                        width: (window.innerWidth - 200) > window.innerHeight ? 'auto' : 'calc(100% - 13px)',
+                                        height: (window.innerWidth - 200) > window.innerHeight ? 'calc(100% - 13px)' : 'auto',
+                                        zIndex: val?.player?.onTop ? 3 : 2
+                                    }} 
+                                    src={allIcons.find(icon => icon.title === props.matchingPlayer?.icon).src} 
+                                    alt="Player Icon" 
+                                    className='PlayerIcon'
+                                />
+                            </div>
+                        }
+                        {
+                            index !== props?.playerPosition && val?.player &&
                             <div className='PlayerIconHolder TileIcon'>
                                 <img 
                                     style={{backgroundColor: val.player.color,
