@@ -13,8 +13,8 @@
             return 'https://typefightbackend.azurewebsites.net/';
         } else {
             // when running locally I can choose between local or deployed
-            // return "https://typefightbackend.azurewebsites.net/";
-            return "http://localhost:3000/";
+            return "https://typefightbackend.azurewebsites.net/";
+            // return "http://localhost:3000/";
         }
     }
 
@@ -30,36 +30,43 @@
     // relies on checking local storage to see if player is in a game and in a session and then clears that local storage
     export const wipePlayer = () => {
         // need playerId to leave game or session
-        const player = localStorage.getItem("player");
-        if (player) {
-            // check local storage for current session (just the session Id)
-            const session = localStorage.getItem("session");
-            if (session) {
-                // check local storage for current game
-                const game = localStorage.getItem("game");
-                if (game) {
-                    // need to wipe the player from this game
-                    // (This means whenever a player exits a session it will kick
-                    // everyone out of that game but not the session).
-                    fetch(getServerBaseUrl() + game + "/wipe", {
+
+        // wipe player will only work if users are already in a session, so errors may occur if they are still in the process of
+        // selecting their attributes and leave
+        try {
+            const player = localStorage.getItem("player");
+            if (player) {
+                // check local storage for current session (just the session Id)
+                const session = localStorage.getItem("session");
+                if (session) {
+                    // check local storage for current game
+                    const game = localStorage.getItem("game");
+                    if (game) {
+                        // need to wipe the player from this game
+                        // (This means whenever a player exits a session it will kick
+                        // everyone out of that game but not the session).
+                        fetch(getServerBaseUrl() + game + "/wipe", {
+                            method: "POST",
+                            headers: getStandardHeader(),
+                            body: JSON.stringify({
+                                sessionId: session
+                            })
+                        });
+                    }
+    
+                    // Now exit the session itself
+                    fetch(getServerBaseUrl() + "session/exit", {
                         method: "POST",
                         headers: getStandardHeader(),
                         body: JSON.stringify({
-                            sessionId: session
+                            sessionId: session,
+                            playerId: player
                         })
                     });
                 }
-
-                // Now exit the session itself
-                fetch(getServerBaseUrl() + "session/exit", {
-                    method: "POST",
-                    headers: getStandardHeader(),
-                    body: JSON.stringify({
-                        sessionId: session,
-                        playerId: player
-                    })
-                });
             }
+        } catch (error) {
+            console.log("Unable to wipe player, they may not have joined a session yet: ", error);
         }
     }
 

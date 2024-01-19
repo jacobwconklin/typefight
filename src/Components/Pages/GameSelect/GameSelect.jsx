@@ -1,4 +1,4 @@
-import GameCard from './GameCard';
+// import GameCard from './GameCard';
 import './GameSelect.scss';
 import ScrollingText from '../../Reusable/ScrollingText';
 import running from '../../../Assets/GameCards/QuickKeys/running.svg';
@@ -55,7 +55,7 @@ const GameSelect = (props) => {
         <div className='GameSelect'>
             <ScrollingText />
             <div className='GamesBox'>
-                <GameCard game={{title:"TypeFight"}}></GameCard>
+                {/* <GameCard game={{title:"TypeFight"}}></GameCard> */}
                 <div className='GameCard' onClick={() => {selectGame("quick-keys")}}  >
                     <h1>Quick Keys</h1>
                     <h3>Competitive</h3>

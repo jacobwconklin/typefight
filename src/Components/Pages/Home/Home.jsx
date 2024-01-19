@@ -29,6 +29,7 @@ const Home = (props) => {
             <div className='PlayOptions'>
                 <div className='OptionBox'
                     onClick={() =>{ 
+                        r.style.setProperty('--title-color', 'white');
                         navigate('/play/host');
                     }}
                     onMouseEnter={() => {
@@ -43,7 +44,10 @@ const Home = (props) => {
                     <h1 style={{color:'red'}}>Host a Game</h1>
                 </div>
                 <div className='OptionBox'
-                    onClick={() => navigate('/play/join')}
+                    onClick={() => {
+                        r.style.setProperty('--title-color', 'white');
+                        navigate('/play/join')
+                    }}
                     onMouseEnter={() => {
                         r.style.setProperty('--title-color', 'green');
                         document.getElementById("green-fig").style.opacity = '25%'
@@ -56,7 +60,10 @@ const Home = (props) => {
                     <h1 style={{color:'green'}}>Join a Game</h1>
                 </div>
                 <div className='OptionBox'
-                    onClick={() => navigate('/play/solo')}
+                    onClick={() => {
+                        r.style.setProperty('--title-color', 'white');
+                        navigate('/play/solo');
+                    }}
                     onMouseEnter={() => {
                         r.style.setProperty('--title-color', 'blue');
                         document.getElementById("blue-fig").style.opacity = '20%'

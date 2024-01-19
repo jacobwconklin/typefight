@@ -13,6 +13,7 @@ const NewPlayer = (props) => {
 
     const [join_code, setJoin_code] = useState(props.code ? props.code : "");
     const [playerInfo, setPlayerInfo] = useState(null); // will have alias, color, icon (title), and font
+    const [alreadySubmitted, setAlreadySubmitted] = useState(false);
     
     // get status as join / host / solo  fom url params
     const playerType = props.type;
@@ -31,6 +32,9 @@ const NewPlayer = (props) => {
 
     // submit button disabled until user entered a join code if they are a joining player
     const submit = async () => {
+        // disable sumbit so user can't submit twice (ie have a copy of themselves join a game)
+        setAlreadySubmitted(true);
+
         // make sure join code is valid and player successfully enters game
         // need to recieve back sessionId and playerId and put them into context
         const result = await fetch(getServerBaseUrl() + "users/" + playerType, {
@@ -76,6 +80,9 @@ const NewPlayer = (props) => {
                             <div className='JoinCode'>
                                 <h2>join code:</h2>
                                 <Input
+                                    style={{fontSize: '16px'}} // TODO this MAY fix iphone zooming in on text box. If it does
+                                    // may need to put into body tag to apply everywhere. If player name box is fixed then
+                                    // this is not needed as meta tag in index.html fixed it.
                                     defaultValue={props.code ? props.code : ""}
                                     type="text"
                                     maxLength={8}
@@ -88,7 +95,7 @@ const NewPlayer = (props) => {
                             </div> 
                             <Button    
                                 className='SubmitButton'
-                                disabled={!playerInfo || !playerInfo.alias || !join_code} 
+                                disabled={alreadySubmitted || !playerInfo || !playerInfo.alias || !join_code} 
                                 onClick={submit}
                             > 
                                 Submit
@@ -97,7 +104,7 @@ const NewPlayer = (props) => {
                         :
                         <Button 
                             className='SubmitButton'
-                            disabled={!playerInfo || !playerInfo.alias} 
+                            disabled={alreadySubmitted || !playerInfo || !playerInfo.alias} 
                             onClick={submit}
                         > 
                             Submit

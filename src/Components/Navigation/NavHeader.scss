@@ -2,51 +2,72 @@
 
 .NavHeader {
     // fixed height
-    position: fixed;
-    top: 0px;
-    left: 0px;
+    position: relative;
     width: 100%;
     height: 50px;
-    background-color: rgb(24, 24, 24); // rgb(30, 0, 0);
-    display: flex;
-    justify-content: space-between;
-    z-index: 4;
+
+    .TopNavBar {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 50px;
+        background-color: rgb(24, 24, 24); // rgb(30, 0, 0);
+        z-index: 4;
+    }
 
     .NavBarButtons {
+        height: 50px;
         width: 150px;
+        top: 0px;
+        left: 0px;
         display: flex;
         justify-content: space-around;
-        
-        .NavBarButton {
-            padding: 10px;
+    }
 
-            &:hover {
-                cursor: pointer;
-            }
-        }
+    .NavBarButton {
+        padding: 10px;
+        width: 30px;
+        height: 30px;
 
-        .NavBarButton > * {
-            color: white;
-            width: 30px;
-            height: 30px;
+        &:hover {
+            cursor: pointer;
         }
     }
 
-    // .SideBarButton {
-    //     position: absolute;
-    //     top: 0px;
-    //     left: 0px;
-    //     padding-left: 15px;
-    //     padding-top: 15px;
-    //     color: white;
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    // }
+    .NavBarButton > * {
+        color: white;
+        width: 30px;
+        height: 30px;
+    }
+
+    .BottomNavBar {position: fixed;
+        top: 50px;
+        left: 0px;
+        width: 100%;
+        height: 48px;
+        border-top: 1px solid grey;
+        background-color: rgb(24, 24, 24);
+        z-index: 4;
+        
+    }
+
+    .NavBarButtonMenu {
+        height: 50px;
+        width: 100px;
+        top: 50px;
+        left: 0px;
+        display: flex;
+        justify-content: space-around;
+    }
 
     .TypeFight {
+        position: absolute;
         height: 50px;
         padding: 0px 10px 0px 10px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         display: flex;
         align-items: center;
 
@@ -59,12 +80,10 @@
 
         &:hover {
             background-color: rgb(48, 48, 48);
+            cursor: pointer;
         }
     }
 
-    .PlayerNavIcon {
-        width: 150px;
-    }
 }
 
 .ReturnHomeModalHolder {

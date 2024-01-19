@@ -10,10 +10,7 @@
 
   // Encompasses the entire screen below the header
   .BelowHeader {
-    min-width:  100vw;
     min-height: calc(100vh - 50px); // if Header wasn't fixed / absolute could use this without margin-top
-    // min-height: 100vh;
-    margin-top: 50px;
     background-color: darkgray;
 
     .SideAndRouter {

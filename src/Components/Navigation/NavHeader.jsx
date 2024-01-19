@@ -4,6 +4,8 @@ import chat from '../../Assets/Site/chat.svg';
 import volumeOn from '../../Assets/Site/volume-on.svg';
 import volumeMute from '../../Assets/Site/volume-mute.svg';
 import keyboard from '../../Assets/Site/keyboard.svg';
+import menuIcon from '../../Assets/Site/menu.svg';
+import collapse from '../../Assets/Site/collapse.svg';
 import { useContext, useState } from 'react';
 import { BackgroundAudioContext } from '../../App';
 import { Button } from 'antd';
@@ -19,6 +21,9 @@ const NavHeader = (props) => {
     // allows navigating back home
     const navigate = useNavigate();
 
+    const [buttonMenuIsOpen, setButtonMenuIsOpen] = useState(false);
+    const windowWidth = window.innerWidth;
+
     const { musicMuted, setMusicMuted, backgroundMusic, setBackgroundMusic } = useContext(BackgroundAudioContext);
 
     // open modal to warn users before they return home
@@ -26,51 +31,94 @@ const NavHeader = (props) => {
 
     return (
         <div className='NavHeader'>
-            <div className='NavBarButtons'>
-                <div className='NavBarButton'>
-                    <img src={chat} alt='Chat Icon' />
-                </div>
-                <div className='NavBarButton'
-                    onClick={() => {
-                        setMusicMuted(!musicMuted);
-                        if (!backgroundMusic) {
-                            setBackgroundMusic('home');
-                        }
-                    }}
-                >
-                    {
-                        musicMuted ?
-                        <img src={volumeMute} alt='Volume Muted' />
-                        :
-                        <img src={volumeOn} alt='Volume On' />
-                    }
-                </div>
-                <div className='NavBarButton'
-                    onClick={() => {
-                        props.setKeyboardVisible(keyboardVisible => !keyboardVisible);
-                    }}
-                >
-                    <img src={keyboard} alt='keyboard' />
+            <div className='TopNavBar'>
+                {
+                    // if a large enough screen, just display all of the nav buttons, but if 
+                    // it is a small mobile screen, display one menu button that opens up a header panel below
+                    // with each of the buttons
+                    windowWidth > 500 ?
+                    <div className='NavBarButtons'>
+                        <div className='NavBarButton'>
+                            <img src={chat} alt='Chat Icon' />
+                        </div>
+                        <div className='NavBarButton'
+                            onClick={() => {
+                                setMusicMuted(!musicMuted);
+                                if (!backgroundMusic) {
+                                    setBackgroundMusic('home');
+                                }
+                            }}
+                        >
+                            {
+                                musicMuted ?
+                                <img src={volumeMute} alt='Volume Muted' />
+                                :
+                                <img src={volumeOn} alt='Volume On' />
+                            }
+                        </div>
+                        <div className='NavBarButton'
+                            onClick={() => {
+                                props.setKeyboardVisible(keyboardVisible => !keyboardVisible);
+                            }}
+                        >
+                            <img src={keyboard} alt='keyboard' />
+                        </div>
+                    </div>
+                    :
+                    <div className='NavBarButton'
+                        onClick={() => {
+                            setButtonMenuIsOpen(currVal => !currVal);
+                        }}
+                    >
+                        <img src={ buttonMenuIsOpen ? collapse : menuIcon } alt='open or close menu'/>
+                    </div>
+                }
+                {/* Maybe put all player icons in the header... would need to push a context out of player icons or something */}
+                <div className='TypeFight'>
+                    <div  className='Title title-font'
+                        onClick={() => {
+                            // IF user is on home screen do nothing, otherwise ask them if they want to return home (so they
+                            // don't accidentally leave mid session) with a modal and then handle wiping that player if they do
+                            if (pathname !== "/") {
+                                setReturnHomeModalIsOpen(true);
+                            }
+                        }}
+                    >
+                        TypeFight
+                    </div>
                 </div>
             </div>
-            {/* Maybe put all player icons in the header... would need to push a context out of player icons or something */}
-            <div className='TypeFight'>
-                <div  className='Title title-font'
-                    onClick={() => {
-                        // IF user is on home screen do nothing, otherwise ask them if they want to return home (so they
-                        // don't accidentally leave mid session) with a modal and then handle wiping that player if they do
-                        if (pathname !== "/") {
-                            setReturnHomeModalIsOpen(true);
-                        }
-                    }}
-                >
-                    TypeFight
-                </div>
-            </div>
-            <div className='PlayerNavIcon'>
 
-            </div>
             {
+                // add buttons as second row when opened for mobile users
+                buttonMenuIsOpen &&
+                <div className='BottomNavBar'>
+                    <div className='NavBarButtonMenu'>
+                        <div className='NavBarButton'>
+                            <img src={chat} alt='Chat Icon' />
+                        </div>
+                        <div className='NavBarButton'
+                            onClick={() => {
+                                setMusicMuted(!musicMuted);
+                                if (!backgroundMusic) {
+                                    setBackgroundMusic('home');
+                                }
+                            }}
+                        >
+                            {
+                                musicMuted ?
+                                <img src={volumeMute} alt='Volume Muted' />
+                                :
+                                <img src={volumeOn} alt='Volume On' />
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+            {
+                // handles return home modal
                 returnHomeModalIsOpen &&
                 <div className='ReturnHomeModalHolder'
                     onClick={() => setReturnHomeModalIsOpen(false)}

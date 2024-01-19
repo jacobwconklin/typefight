@@ -1,0 +1,17 @@
+A killer snail chases the players' characters. The players have to click a location for their players to move to, 
+and the snails move directly there slowly. The goal is to be the last person alive and survive as long as possible. 
+The map may be a maze and words have to be typed to clear walls (that either keep appearing or the screen scrolls). 
+Requires the users to quickly click and type and strategically pick locations. Would prefer it to be cooperative with the 
+number of snails equal to the number of players and maybe with revives. Could also be competitve and dead players could place
+obstacles or something. Maybe the words themselves make up the maze like a crossword puzzle you try to run through, and so users have 
+to type words to destroy them so they can go a direction that they want to, while the snails can move directly as the crow flies. 
+Or players could be like underground mining and need to type words for "energy" to move but more and more un-minable rocks start to show up 
+so players have to move in weird round-about ways. Or finally, players have avatars that move on their own and they simply pick a route for 
+the avatar and type to clear words off of that route. 
+
+OR THIS MIGHT BE IT!!!, you click where you want your person to go through the maze but 
+they can't go through walls, and you have to type to move them so the faster you type the fater they go with a funny walk like steppy feet.
+The maze may have extra walls pop up, or may just shrink slowly, or the snails could just get faster or there could be time to actually 
+"win" based on a difficulty selected (which could also change the maze). so player clicks where they want to go in the maze and then types
+to "move" their player. To make it smart the player could navigate the maze, to make it hard they can only move in a straight line and stop 
+if they hit a maze edge, which may be more do-able. 

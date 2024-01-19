@@ -50,24 +50,26 @@ const TypeFlight = (props) => {
                     const newGameArray = Array.apply({}, Array(100));
 
                     // go through events and add them to the gameArray
-                    data.events.forEach(event => {
-                        // TODO could add all events to each index in array if I have an event array and then map through them layering them 
-                        // all on top of each other in gameplay, but that can come later
-                        if (event.activated) {
-                            // Go ahead and add event to all affected squares if activated here?
-                            const eventArea = getEventArea(event.position, event.type);
-                            for (const property in eventArea) {
-                                newGameArray[eventArea[property]] = newGameArray[eventArea[property]] 
-                                    ? newGameArray[eventArea[property]]["event"] = 
-                                        {...newGameArray[eventArea[property]], event} : {event} 
+                    if (data.events && data.events.length > 0) {
+                        data.events.forEach(event => {
+                            // TODO could add all events to each index in array if I have an event array and then map through them layering them 
+                            // all on top of each other in gameplay, but that can come later
+                            if (event.activated) {
+                                // Go ahead and add event to all affected squares if activated here?
+                                const eventArea = getEventArea(event.position, event.type);
+                                for (const property in eventArea) {
+                                    newGameArray[eventArea[property]] = newGameArray[eventArea[property]] 
+                                        ? newGameArray[eventArea[property]]["event"] = 
+                                            {...newGameArray[eventArea[property]], event} : {event} 
+                                }
+                            } else {
+                                newGameArray[event.position] = newGameArray[event.position] 
+                                    ? newGameArray[event.position]["event"] = {...newGameArray[event.position], event} : {event}; 
                             }
-                        } else {
-                            newGameArray[event.position] = newGameArray[event.position] 
-                                ? newGameArray[event.position]["event"] = {...newGameArray[event.position], event} : {event}; 
-                        }
-                    });
+                        });
+                    }
 
-                    // go through players and add them to gameArray
+                    // go through other players and add them to gameArray
                     data.players.forEach(player => {
                         if (player.isAlive && !player.playerId === playerId) {
                             // add living player IF not the matching player (want to do them based just on playerPosition)
@@ -97,7 +99,7 @@ const TypeFlight = (props) => {
 
                         // check if user's player is on top of a dead player they can revive
                         // but don't re-set the value if it's already set to the same player
-                        if ( newGameArray[matchingPlayer.position]["deadPlayer"] && 
+                        if ( newGameArray[matchingPlayer.position] && newGameArray[matchingPlayer.position]["deadPlayer"] && 
                             (playerToRevive == null || 
                                 playerToRevive.playerId !== newGameArray[matchingPlayer.position]["deadPlayer"].playerId ) ) {
                             setPlayerToRevive(newGameArray[matchingPlayer.position]["deadPlayer"]);
@@ -106,7 +108,7 @@ const TypeFlight = (props) => {
                     setGameArray(newGameArray);
                 }
             } catch (error) {
-                console.log("Error fetching textplosion game status", error);
+                console.log("Error fetching type flight game status", error);
             }
         }, 1000); // TODO adjust for wanted latency hitting backend for status
   
